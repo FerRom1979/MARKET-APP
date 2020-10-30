@@ -54,7 +54,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "post-commit": "git update-index --again && yarn lint:fix",
+      "post-commit": "git update-index --again && yarn lint:fix && git add .",
       "post-merge": "yarn install"
     }
   },

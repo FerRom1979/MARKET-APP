@@ -1,6 +1,6 @@
 /* eslint-disable no-use-before-define */
 import React from 'react';
-import SideMenu from './Components/SideMenu';
+import SideMenu from './Components/Sidemenu/index';
 
 const App: React.FC = () => {
   return (

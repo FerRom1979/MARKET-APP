@@ -1,25 +1,9 @@
 /* eslint-disable no-use-before-define */
 import React from 'react';
 import { Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import CardHeader from './CardHeader';
-
-const usesStyles = makeStyles(() => ({
-  root: {
-    display: 'flex',
-  },
-  container: {
-    paddingTop: '20px',
-    alignItems: 'center',
-  },
-  containerGrafic: {
-    margin: 'auto',
-  },
-  typography: {
-    textAlign: 'center',
-  },
-}));
+import CardHeader from '../cardHeader/index';
+import usesStyles from './style';
 
 const Dashboard: React.FC = () => {
   const classes = usesStyles();
@@ -31,13 +15,13 @@ const Dashboard: React.FC = () => {
             Titulo
           </Typography>
         </Grid>
-        <Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
+        <Grid item xs={12} sm={4}>
           <CardHeader />
         </Grid>
-        <Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
+        <Grid item xs={12} sm={4}>
           <CardHeader />
         </Grid>
-        <Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
+        <Grid item xs={12} sm={4}>
           <CardHeader />
         </Grid>
       </Grid>

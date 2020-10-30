@@ -1,3 +1,4 @@
+/* eslint-disable import/no-duplicates */
 /* eslint-disable no-use-before-define */
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch as SwitchItem, Route, Link } from 'react-router-dom';
@@ -15,70 +16,11 @@ import ForwardIcon from '@material-ui/icons/Forward';
 import CloseIcon from '@material-ui/icons/Close';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Dashboard from './Dashboard';
-
-const drawerWidth = 240;
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-  },
-  drawer: {
-    [theme.breakpoints.up('sm')]: {
-      width: drawerWidth,
-      flexShrink: 0,
-    },
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    backgroundColor: 'blue',
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up('sm')]: {
-      display: 'none',
-    },
-  },
-  toolbar: theme.mixins.toolbar,
-  drawerPaper: {
-    width: drawerWidth,
-    backgroundColor: 'black',
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-  },
-  closeMenuButton: {
-    marginRight: 'auto',
-    marginLeft: 0,
-  },
-  listItem: {
-    borderBottom: '2px solid gray',
-    textDecoration: 'none',
-    fontSize: '15px',
-    color: 'white',
-    '&:hover': {
-      backgroundColor: 'red',
-    },
-  },
-  icons: {
-    marginRight: '10px',
-  },
-  language: {
-    marginLeft: 'auto',
-  },
-  switch: {
-    marginRight: '20px',
-    marginLeft: '10px',
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: '20px',
-  },
-}));
+import usesStyles from './style';
+import Dashboard from '../Dashboard/index';
 
 const SideMenu: React.FC = () => {
-  const classes = useStyles();
-  const theme = useTheme();
+  const classes = usesStyles();
   const [mobileOpen, setMobileOpen] = useState(false);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -135,7 +77,6 @@ const SideMenu: React.FC = () => {
           <Hidden smUp implementation="css">
             <Drawer
               variant="temporary"
-              anchor={theme.direction === 'rtl' ? 'right' : 'left'}
               open={mobileOpen}
               onClose={handleDrawerToggle}
               classes={{

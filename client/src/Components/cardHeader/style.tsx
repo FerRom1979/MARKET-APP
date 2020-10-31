@@ -1,17 +1,23 @@
 import { makeStyles } from '@material-ui/core/styles';
 
+const darkPrimaryBackground = '#455A64';
+// const lightPrimaryColor = '#CFD8DC';
+const textprimaryColor = '#FFFFFF';
+// const primaryTextColor = '#212121';
+// const accentColor = '#FF5722';
+
 const usesStyles = makeStyles(() => ({
   root: {
     textAlign: 'center',
-    background: 'blue',
+    background: darkPrimaryBackground,
   },
   text: {
     fontSize: 18,
-    color: 'white',
+    color: textprimaryColor,
   },
   title: {
     fontSize: 22,
-    color: 'white',
+    color: textprimaryColor,
     fontWeight: 'bold',
   },
 }));

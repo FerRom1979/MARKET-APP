@@ -1,5 +1,17 @@
 import { makeStyles } from '@material-ui/core/styles';
 
+const darkPrimaryBackground = '#455A64';
+const lightPrimaryColor = '#CFD8DC';
+const textprimaryColor = '#FFFFFF';
+const primaryTextColor = '#212121';
+const accentColor = '#FF5722';
+/* .default-primary-color { background: #607D8B; }
+.light-primary-color   { background: #CFD8DC; }
+.text-primary-color    { color: #FFFFFF; }
+.accent-color          { background: #FF5722; }
+.primary-text-color    { color: #212121; }
+.secondary-text-color  { color: #757575; }
+.divider-color         { border-color: #BDBDBD; } */
 const drawerWidth = 240;
 const usesStyles = makeStyles((theme) => ({
   root: {
@@ -13,7 +25,7 @@ const usesStyles = makeStyles((theme) => ({
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
-    backgroundColor: 'blue',
+    backgroundColor: darkPrimaryBackground,
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -24,7 +36,7 @@ const usesStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
     width: drawerWidth,
-    backgroundColor: 'black',
+    backgroundColor: lightPrimaryColor,
   },
   content: {
     flexGrow: 1,
@@ -38,9 +50,9 @@ const usesStyles = makeStyles((theme) => ({
     borderBottom: '2px solid gray',
     textDecoration: 'none',
     fontSize: '15px',
-    color: 'white',
+    color: primaryTextColor,
     '&:hover': {
-      backgroundColor: 'red',
+      backgroundColor: accentColor,
     },
   },
   icons: {
@@ -52,9 +64,13 @@ const usesStyles = makeStyles((theme) => ({
   switch: {
     marginRight: '20px',
     marginLeft: '10px',
-    color: 'white',
+    color: primaryTextColor,
     fontWeight: 'bold',
     fontSize: '20px',
+  },
+  button: {
+    backgroundColor: darkPrimaryBackground,
+    color: textprimaryColor,
   },
 }));
 

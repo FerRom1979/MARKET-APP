@@ -24,6 +24,7 @@ import Dashboard from '../Dashboard/index';
 import usesStyles from './style';
 
 const SideMenu: React.FC = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [t, i18n] = useTranslation('global');
   const classes = usesStyles();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -84,6 +85,7 @@ const SideMenu: React.FC = () => {
       <ThemeProvider theme={theme}>
         <Paper>
           <div className={classes.root}>
+            darkmode
             <CssBaseline />
             <AppBar position="fixed" className={classes.appBar}>
               <Toolbar>
@@ -154,7 +156,7 @@ const SideMenu: React.FC = () => {
               <div className={classes.toolbar} />
               <SwitchItem>
                 <Route exact path="/">
-                  <Dashboard />
+                  <Dashboard darkmode={darkmode} />
                 </Route>
                 <Route exact path="/seccion2">
                   <h1>section 2</h1>

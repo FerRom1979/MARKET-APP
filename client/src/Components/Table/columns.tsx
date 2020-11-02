@@ -1,4 +1,13 @@
-const COLUMNS = [
+import { Column } from 'react-table';
+
+interface Data {
+  id: string;
+  nombre: string;
+  descripcion: string;
+  precioFinal: number;
+  precioMayorista: number;
+}
+const COLUMNS: Column<Data>[] = [
   {
     Header: 'Id',
     accessor: 'id',
@@ -9,7 +18,7 @@ const COLUMNS = [
   },
   {
     Header: 'Descripcion',
-    accessor: 'desc',
+    accessor: 'descripcion',
   },
   {
     Header: 'Preciomayorista',
@@ -17,7 +26,7 @@ const COLUMNS = [
   },
   {
     Header: 'Preciofinal',
-    accessor: 'pre',
+    accessor: 'precioFinal',
   },
 ];
 export default COLUMNS;

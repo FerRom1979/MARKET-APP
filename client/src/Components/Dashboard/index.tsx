@@ -4,9 +4,13 @@ import { Grid } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import CardHeader from '../cardHeader/index';
 import usesStyles from './style';
-import BasicTable from '../Table/BasiTable';
+import BasicTable from '../Table/BasicTable';
 
-const Dashboard: React.FC = () => {
+interface IDashboard {
+  darkmode: boolean;
+}
+
+const Dashboard: React.FC<IDashboard> = () => {
   const classes = usesStyles();
   return (
     <div className={classes.root}>
@@ -16,13 +20,13 @@ const Dashboard: React.FC = () => {
             Titulo
           </Typography>
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={8}>
           <BasicTable />
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={12}>
           <CardHeader />
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={12}>
           <CardHeader />
         </Grid>
       </Grid>

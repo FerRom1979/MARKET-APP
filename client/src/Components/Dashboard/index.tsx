@@ -4,6 +4,7 @@ import { Grid } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import CardHeader from '../cardHeader/index';
 import usesStyles from './style';
+import BasicTable from '../Table/BasiTable';
 
 const Dashboard: React.FC = () => {
   const classes = usesStyles();
@@ -16,7 +17,7 @@ const Dashboard: React.FC = () => {
           </Typography>
         </Grid>
         <Grid item xs={12} sm={4}>
-          <CardHeader />
+          <BasicTable />
         </Grid>
         <Grid item xs={12} sm={4}>
           <CardHeader />

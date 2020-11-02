@@ -1,10 +1,11 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const darkPrimaryBackground = '#455A64';
-const lightPrimaryColor = '#CFD8DC';
+const primary = '#455A64';
 const textprimaryColor = '#FFFFFF';
 const primaryTextColor = '#212121';
 const accentColor = '#FF5722';
+const Secundary = '#757575';
+const defaultColor = '#607D8B';
 /* .default-primary-color { background: #607D8B; }
 .light-primary-color   { background: #CFD8DC; }
 .text-primary-color    { color: #FFFFFF; }
@@ -25,7 +26,7 @@ const usesStyles = makeStyles((theme) => ({
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
-    backgroundColor: darkPrimaryBackground,
+    backgroundColor: primary,
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -36,7 +37,7 @@ const usesStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
     width: drawerWidth,
-    backgroundColor: lightPrimaryColor,
+    backgroundColor: primary,
   },
   content: {
     flexGrow: 1,
@@ -50,7 +51,7 @@ const usesStyles = makeStyles((theme) => ({
     borderBottom: '2px solid gray',
     textDecoration: 'none',
     fontSize: '15px',
-    color: primaryTextColor,
+    color: Secundary,
     '&:hover': {
       backgroundColor: accentColor,
     },
@@ -69,7 +70,11 @@ const usesStyles = makeStyles((theme) => ({
     fontSize: '20px',
   },
   button: {
-    backgroundColor: darkPrimaryBackground,
+    backgroundColor: primary,
+    color: textprimaryColor,
+  },
+  dashboard: {
+    backgroundColor: defaultColor,
     color: textprimaryColor,
   },
 }));

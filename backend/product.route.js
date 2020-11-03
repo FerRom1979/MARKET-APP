@@ -10,9 +10,8 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { ID, name, description, quantity, price, finalPrice } = req.body;
+  const { name, description, quantity, price, finalPrice } = req.body;
   const product = new productSchema({
-    ID,
     name,
     description,
     quantity,

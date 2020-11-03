@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
-const URI = "mongodb://localhost/market-app";
+const URI =
+  "mongodb+srv://market-app:1234@cluster0.knbkj.mongodb.net/market-app?retryWrites=true&w=majority";
 
 mongoose
   .connect(URI, { useNewUrlParser: true })

@@ -1,11 +1,11 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const primary = '#455A64';
+const primary = '#607D8B';
 const textprimaryColor = '#FFFFFF';
 const primaryTextColor = '#212121';
 const accentColor = '#FF5722';
-const Secundary = '#757575';
-const defaultColor = '#607D8B';
+const Secundary = '#607D8B';
+const defaultColor = '#BDBDBD';
 /* .default-primary-color { background: #607D8B; }
 .light-primary-color   { background: #CFD8DC; }
 .text-primary-color    { color: #FFFFFF; }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Column } from 'react-table';
 
 interface Data {
@@ -21,11 +22,11 @@ const COLUMNS: Column<Data>[] = [
     accessor: 'descripcion',
   },
   {
-    Header: 'Preciomayorista',
+    Header: 'Precio mayorista',
     accessor: 'precioMayorista',
   },
   {
-    Header: 'Preciofinal',
+    Header: 'Precio final',
     accessor: 'precioFinal',
   },
 ];

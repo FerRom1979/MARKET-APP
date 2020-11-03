@@ -24,7 +24,6 @@ import Dashboard from '../Dashboard/index';
 import usesStyles from './style';
 
 const SideMenu: React.FC = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [t, i18n] = useTranslation('global');
   const classes = usesStyles();
   const [mobileOpen, setMobileOpen] = useState(false);

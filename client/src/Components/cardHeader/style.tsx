@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const darkPrimaryBackground = '#455A64';
+const darkPrimaryBackground = '#607D8B';
 // const lightPrimaryColor = '#CFD8DC';
 const textprimaryColor = '#FFFFFF';
 // const primaryTextColor = '#212121';

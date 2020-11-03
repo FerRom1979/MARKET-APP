@@ -5,13 +5,15 @@ import Typography from '@material-ui/core/Typography';
 import CardHeader from '../cardHeader/index';
 import usesStyles from './style';
 import BasicTable from '../Table/BasicTable';
+import List from '../List/index';
 
 interface IDashboard {
   darkmode: boolean;
 }
 
-const Dashboard: React.FC<IDashboard> = () => {
+const Dashboard: React.FC<IDashboard> = ({ darkmode }) => {
   const classes = usesStyles();
+
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>
@@ -21,10 +23,10 @@ const Dashboard: React.FC<IDashboard> = () => {
           </Typography>
         </Grid>
         <Grid item xs={8}>
-          <BasicTable />
+          <BasicTable darkmode={darkmode} />
         </Grid>
-        <Grid item xs={12} sm={12}>
-          <CardHeader />
+        <Grid item xs={12} sm={6}>
+          <List />
         </Grid>
         <Grid item xs={12} sm={12}>
           <CardHeader />

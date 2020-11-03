@@ -10,7 +10,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 /* Routes */
-app.use(require("./product.route"));
+app.use("/products", require("./product.route"));
 
 app.listen(app.get("port"), () => {
   console.log(`Server on port ${app.get("port")}`);

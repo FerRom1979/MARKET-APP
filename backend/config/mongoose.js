@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-console.log(process.env.MONGO_URI);
+const URI = process.env.MONGO_URI;
 
-const URI =
-  "mongodb+srv://market-app:1234@cluster0.knbkj.mongodb.net/market-app?retryWrites=true&w=majority";
 mongoose
-  .connect(URI, { useNewUrlParser: true })
+  .connect(URI, {
+    useNewUrlParser: true,
+  })
   .then((db) => console.log("It was possible to connect to the database"))
   .catch((err) => console.log(err));
 

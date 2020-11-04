@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
+require("dotenv").config();
 
-const URI = process.env.REACT_APP_MONGO_URI;
+console.log(process.env.MONGO_URI);
+
+const URI =
+  "mongodb+srv://market-app:1234@cluster0.knbkj.mongodb.net/market-app?retryWrites=true&w=majority";
 mongoose
   .connect(URI, { useNewUrlParser: true })
   .then((db) => console.log("It was possible to connect to the database"))

@@ -4,9 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node backend/config/express.js",
     "client": "cd client && yarn start",
-    "server": "cd backend && nodemon config/express.js",
+    "server": "cd backend && cd config node express.js ",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
   },
   "dependencies": {

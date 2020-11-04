@@ -1,10 +1,14 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
+require('dotenv').config();
 
-const URI = "mongodb://localhost/market-app";
+const URI = process.env.MONGO_URI;
 
 mongoose
-  .connect(URI, { useNewUrlParser: true })
-  .then((db) => console.log("It was possible to connect to the database"))
+  .connect(URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then((db) => console.log('It was possible to connect to the database'))
   .catch((err) => console.log(err));
 
 module.exports = mongoose;

@@ -19,15 +19,15 @@ exports.postProduct = async (req, res) => {
 };
 
 exports.editProduct = async (req, res) => {
-  const { name, description, quantity, price, finalPrice } = req.body;
-  const editProductConst = {
-    name,
-    description,
-    quantity,
-    price,
-    finalPrice,
-  };
-  await productSchema.findByIdAndUpdate(req.params.id, editProductConst);
+  await productSchema.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true },
+    (err, prod) => {
+      if (err) return res.status(500).send(err);
+      return res.send(prod);
+    }
+  );
   res.json({ status: "Product updated" });
 };
 

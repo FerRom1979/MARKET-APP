@@ -20,7 +20,6 @@ const ListTask: React.FC = () => {
   });
   const [tasks, setTasks] = useState<ITask[]>([]);
   /* console.log(newTask); */
-  console.log(tasks);
 
   const gettask = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setNewTask({

@@ -5,8 +5,8 @@ interface Data {
   id: string;
   nombre: string;
   descripcion: string;
-  precioFinal: number;
-  precioMayorista: number;
+  precioFinal: string;
+  precioMayorista: string;
 }
 const COLUMNS: Column<Data>[] = [
   {

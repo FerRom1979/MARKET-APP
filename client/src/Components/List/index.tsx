@@ -1,114 +1,66 @@
+/* eslint-disable no-shadow */
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable no-use-before-define */
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import React, { useState } from 'react';
-import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      width: '100%',
-      maxWidth: 360,
-      backgroundColor: theme.palette.background.paper,
-      position: 'relative',
-      overflow: 'auto',
-      maxHeight: 300,
-    },
-    listSection: {
-      backgroundColor: 'inherit',
-    },
-    ul: {
-      backgroundColor: 'inherit',
-      padding: 0,
-    },
-  }),
-);
+interface ITask {
+  id: string;
+  description: string;
+  quantity: string;
+  higherPrice: string;
+  finalPrice: string;
+}
+const ListTask: React.FC = () => {
+  const [newTask, setNewTask] = useState({
+    id: '',
+    description: '',
+    quantity: '',
+    higherPrice: '',
+    finalPrice: '',
+  });
+  const [tasks, setTasks] = useState<ITask[]>([]);
+  /* console.log(newTask); */
+  console.log(tasks);
 
-const ListData: React.FC<IlistFormPros> = () => {
-  const classes = useStyles();
-
-  const newList = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setFormBubbles(e.bubbles);
-
-    setListItem({
-      id: newListItem.id,
-      description: newListItem.description,
-      quantity: newListItem.quantity,
-      higherPrice: newListItem.higherPrice,
-      finalPrice: newListItem.higherPrice,
+  const gettask = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setNewTask({
+      ...newTask,
+      [e.target.name]: [e.target.value],
+      [e.target.name]: [e.target.value],
+      [e.target.name]: [e.target.value],
+      [e.target.name]: [e.target.value],
+      [e.target.name]: [e.target.value],
     });
   };
-  const [formBubbles, setFormBubbles] = useState(false);
-  const [newListItem, setNewListItem] = useState({
-    id: 0,
-    description: '',
-    quantity: 0,
-    higherPrice: 0,
-    finalPrice: 0,
-  });
-  const [listItem, setListItem] = useState({
-    id: 0,
-    description: '',
-    quantity: 0,
-    higherPrice: 0,
-    finalPrice: 0,
-  });
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setNewListItem({
-      ...newListItem,
-      [e.target.name]: e.target.value,
-    });
+    addTask(newTask);
+  };
+  const addTask = (newTask: ITask) => {
+    const newTasks: ITask[] = [newTask];
+    setTasks(newTasks);
   };
   return (
     <div>
-      <form onSubmit={(e) => newList(e)}>
-        <input type="text" placeholder="Id" name="id" onChange={handleInputChange} />
-        <input
-          type="text"
-          placeholder="Descripcion"
-          name="description"
-          onChange={handleInputChange}
-        />
-        <input type="text" placeholder="Cantidad" name="quantity" onChange={handleInputChange} />
-        <input
-          type="text"
-          placeholder="Precio mayorista"
-          name="higherPrice"
-          onChange={handleInputChange}
-        />
-        <input
-          type="text"
-          placeholder="Precio final"
-          name="finalPrice"
-          onChange={handleInputChange}
-        />
-        <button type="submit">Enviar</button>
+      <form onSubmit={handleSubmit}>
+        <input type="text" onChange={gettask} name="id" placeholder="id" />
+        <input type="text" onChange={gettask} name="description" placeholder="descripcion" />
+        <input type="text" onChange={gettask} name="quantity" placeholder="cantidad" />
+        <input type="text" onChange={gettask} name="higherPrice" placeholder="precio por mayor" />
+        <input type="text" onChange={gettask} name="finalPrice" placeholder="precio por menor" />
+        <button type="submit">Guardar</button>
       </form>
-      {formBubbles !== false && (
+      {tasks.map((t: ITask) => (
         <>
-          <List>
-            <ul className={classes.ul}>
-              {listItem.map((item) => (
-                <ListItem key={`${item}`}>
-                  <ListItemText primary={`Item ${item}`} />
-                </ListItem>
-              ))}
-            </ul>
-          </List>
+          <h2>{t.id[0]}</h2>
+          <h2>{t.description[0]}</h2>
+          <h2>{t.quantity[0]}</h2>
+          <h2>{t.higherPrice[0]}</h2>
+          <h2>{t.finalPrice[0]}</h2>
         </>
-      )}
+      ))}
     </div>
   );
 };
-interface IlistFormPros {
-  id: number;
-  Description: string;
-  Cantidad: string;
-  PrecioMayorista: number;
-  PrecioFinal: number;
-}
 
-export default ListData;
+export default ListTask;

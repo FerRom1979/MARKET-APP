@@ -22,23 +22,23 @@ const BasiCTable: React.FC<IBasicTable> = ({ darkmode }) => {
       id: '1',
       nombre: 'Arroz Gallo',
       descripcion: 'Arroz blanco,grano largo,cocido',
-      precioMayorista: 50,
-      precioFinal: 100,
+      precioMayorista: '50',
+      precioFinal: '100',
     },
     {
       id: '2',
       nombre: 'Arroz Moneda',
       descripcion: 'Arroz integral,grano largo,crudo',
-      precioMayorista: 30,
-      precioFinal: 70,
+      precioMayorista: '30',
+      precioFinal: '70',
     },
   ];
   interface Data {
     id: string;
     nombre: string;
     descripcion: string;
-    precioFinal: number;
-    precioMayorista: number;
+    precioFinal: string;
+    precioMayorista: string;
   }
   const columns = useMemo(() => COLUMNS, []);
   const data = useMemo(() => RowData, []);

@@ -14,7 +14,10 @@ exports.postProduct = async (req, res) => {
     price,
     finalPrice,
   });
-  await product.save();
+  await product.save((err) => {
+    if (err) return console.error(err);
+    console.log("Product saved");
+  });
   res.json({ status: "Product saved" });
 };
 
@@ -23,15 +26,15 @@ exports.editProduct = async (req, res) => {
     req.params.id,
     req.body,
     { new: true },
-    (err, prod) => {
+    (err) => {
       if (err) return res.status(500).send(err);
-      return res.send(prod);
+      console.log("Product updated");
     }
   );
   res.json({ status: "Product updated" });
 };
 
 exports.deleteProduct = async (req, res) => {
-  await productSchema.findByIdAndRemove(req.params.id);
+  await productSchema.findByIdAndDelete(req.params.id);
   res.json({ status: "Product deleted" });
 };

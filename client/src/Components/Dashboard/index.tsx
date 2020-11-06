@@ -2,6 +2,7 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CardHeader from '../cardHeader/index';
 import usesStyles from './style';
 import BasicTable from '../Table/BasicTable';
@@ -13,26 +14,33 @@ interface IDashboard {
 
 const Dashboard: React.FC<IDashboard> = ({ darkmode }) => {
   const classes = usesStyles();
-
+  console.log(darkmode);
+  const theme = createMuiTheme({
+    palette: {
+      type: darkmode ? 'dark' : 'light',
+    },
+  });
   return (
-    <div className={classes.root}>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <Typography variant="h4" component="h2" gutterBottom className={classes.typography}>
-            Titulo
-          </Typography>
+    <ThemeProvider theme={theme}>
+      <div className={classes.root}>
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <Typography variant="h4" component="h2" gutterBottom className={classes.typography}>
+              Titulo
+            </Typography>
+          </Grid>
+          <Grid item xs={6}>
+            <BasicTable darkmode={darkmode} />
+          </Grid>
+          <Grid item xs={6}>
+            <ListTask />
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <CardHeader />
+          </Grid>
         </Grid>
-        <Grid item xs={10}>
-          <BasicTable darkmode={darkmode} />
-        </Grid>
-        <Grid item xs={12}>
-          <ListTask />
-        </Grid>
-        <Grid item xs={12} sm={12}>
-          <CardHeader />
-        </Grid>
-      </Grid>
-    </div>
+      </div>
+    </ThemeProvider>
   );
 };
 

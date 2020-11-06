@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       '& .MuiTextField-root': {
         margin: theme.spacing(1),
-        width: 200,
+        width: '100%',
       },
     },
     button: {
@@ -14,14 +14,20 @@ const useStyles = makeStyles((theme: Theme) =>
       maxWidth: '200px',
     },
     table: {
-      minWidth: '50%vh',
+      minWidth: 650,
     },
     head: {
-      backgroundColor: 'white',
+      backgroundColor: 'black',
       color: 'white',
     },
     body: {
       fontSize: 14,
+    },
+    row: {
+      color: 'white',
+    },
+    Controller: {
+      width: '50%',
     },
   }),
 );

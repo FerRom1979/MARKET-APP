@@ -32,6 +32,27 @@ const BasiCTable: React.FC<IBasicTable> = ({ darkmode }) => {
       precioMayorista: '30',
       precioFinal: '70',
     },
+    {
+      id: '2',
+      nombre: 'Arroz Moneda',
+      descripcion: 'Arroz integral,grano largo,crudo',
+      precioMayorista: '30',
+      precioFinal: '70',
+    },
+    {
+      id: '2',
+      nombre: 'Arroz Moneda',
+      descripcion: 'Arroz integral,grano largo,crudo',
+      precioMayorista: '30',
+      precioFinal: '70',
+    },
+    {
+      id: '2',
+      nombre: 'Arroz Moneda',
+      descripcion: 'Arroz integral,grano largo,crudo',
+      precioMayorista: '30',
+      precioFinal: '70',
+    },
   ];
   interface Data {
     id: string;

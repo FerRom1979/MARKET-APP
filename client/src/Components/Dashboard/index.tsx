@@ -22,7 +22,7 @@ const Dashboard: React.FC<IDashboard> = ({ darkmode }) => {
             Titulo
           </Typography>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={10}>
           <BasicTable darkmode={darkmode} />
         </Grid>
         <Grid item xs={12}>

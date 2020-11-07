@@ -5,17 +5,7 @@ import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
-import {
-  Table,
-  TableContainer,
-  TableRow,
-  TableBody,
-  TableCell,
-  Paper,
-  Grid,
-  Modal,
-} from '@material-ui/core';
-import TableHead from '@material-ui/core/TableHead';
+import { Modal } from '@material-ui/core';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import useStyles from './style';
 
@@ -45,8 +35,6 @@ const ListTask: React.FC<IBasicTable> = ({ darkmode }) => {
     e.target.reset();
   };
 
-  // eslint-disable-next-line no-use-before-define
-  const rows = listItem;
   interface Ilist {
     id: number;
     description: string;
@@ -140,59 +128,19 @@ const ListTask: React.FC<IBasicTable> = ({ darkmode }) => {
   return (
     <ThemeProvider theme={theme}>
       <div style={{ height: 400, width: '100%' }}>
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <TableContainer component={Paper}>
-              <Table className={classes.table} aria-label="simple table">
-                <TableHead className={classes.head}>
-                  <TableRow>
-                    <TableCell className={classes.row}>Id</TableCell>
-                    <TableCell align="right" className={classes.row}>
-                      Descripcion
-                    </TableCell>
-                    <TableCell align="right" className={classes.row}>
-                      Precio por mayor
-                    </TableCell>
-                    <TableCell align="right" className={classes.row}>
-                      Precio Final
-                    </TableCell>
-                    <TableCell align="right" className={classes.row}>
-                      Cantidad
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {rows.map((row) => (
-                    <TableRow>
-                      <TableCell component="th" scope="row">
-                        {row.id}
-                      </TableCell>
-                      <TableCell align="right">{row.description}</TableCell>
-                      <TableCell align="right">{row.higherPrice}</TableCell>
-                      <TableCell align="right">{row.finalPrice}</TableCell>
-                      <TableCell align="right">{row.quantity}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Grid>
-          <Grid item xs={12}>
-            <div className={classes.buttonModal}>
-              <Button type="button" onClick={handleOpen} variant="contained" color="primary">
-                Abrir Formulario
-              </Button>
-              <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
-              >
-                {body}
-              </Modal>
-            </div>
-          </Grid>
-        </Grid>
+        <div className={classes.buttonModal}>
+          <Button type="button" onClick={handleOpen} variant="contained" color="primary">
+            <SaveIcon />
+          </Button>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+          >
+            {body}
+          </Modal>
+        </div>
       </div>
     </ThemeProvider>
   );

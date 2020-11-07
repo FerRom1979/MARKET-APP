@@ -28,10 +28,10 @@ const Dashboard: React.FC<IDashboard> = ({ darkmode }) => {
               Titulo
             </Typography>
           </Grid>
-          <Grid item xs={12} lg={6}>
+          <Grid item xs={10}>
             <BasicTable darkmode={darkmode} />
           </Grid>
-          <Grid item xs={12} lg={6}>
+          <Grid item xs={2}>
             <ListTask darkmode={darkmode} />
           </Grid>
           <Grid item xs={12} sm={12}>

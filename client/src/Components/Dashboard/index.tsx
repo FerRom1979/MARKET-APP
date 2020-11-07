@@ -14,7 +14,6 @@ interface IDashboard {
 
 const Dashboard: React.FC<IDashboard> = ({ darkmode }) => {
   const classes = usesStyles();
-  console.log(darkmode);
   const theme = createMuiTheme({
     palette: {
       type: darkmode ? 'dark' : 'light',
@@ -23,17 +22,17 @@ const Dashboard: React.FC<IDashboard> = ({ darkmode }) => {
   return (
     <ThemeProvider theme={theme}>
       <div className={classes.root}>
-        <Grid container spacing={3}>
+        <Grid container spacing={1}>
           <Grid item xs={12}>
             <Typography variant="h4" component="h2" gutterBottom className={classes.typography}>
               Titulo
             </Typography>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} lg={6}>
             <BasicTable darkmode={darkmode} />
           </Grid>
-          <Grid item xs={6}>
-            <ListTask />
+          <Grid item xs={12} lg={6}>
+            <ListTask darkmode={darkmode} />
           </Grid>
           <Grid item xs={12} sm={12}>
             <CardHeader />

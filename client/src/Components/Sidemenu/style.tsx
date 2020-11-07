@@ -13,7 +13,7 @@ const defaultColor = '#BDBDBD';
 .primary-text-color    { color: #212121; }
 .secondary-text-color  { color: #757575; }
 .divider-color         { border-color: #BDBDBD; } */
-const drawerWidth = 240;
+const drawerWidth = 140;
 const usesStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',

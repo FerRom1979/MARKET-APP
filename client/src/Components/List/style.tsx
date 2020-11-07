@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       '& .MuiTextField-root': {
         margin: theme.spacing(1),
-        width: '100%',
+        width: '50%',
       },
     },
     button: {
@@ -14,7 +14,8 @@ const useStyles = makeStyles((theme: Theme) =>
       maxWidth: '200px',
     },
     table: {
-      minWidth: 650,
+      minWidth: 400,
+      textAlign: 'left',
     },
     head: {
       backgroundColor: 'black',
@@ -27,7 +28,19 @@ const useStyles = makeStyles((theme: Theme) =>
       color: 'white',
     },
     Controller: {
-      width: '50%',
+      width: '100%',
+    },
+    paper: {
+      flexDirection: 'column',
+      position: 'absolute',
+      width: 400,
+      backgroundColor: theme.palette.background.paper,
+      border: '2px solid #000',
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3),
+    },
+    buttonModal: {
+      textAlign: 'center',
     },
   }),
 );

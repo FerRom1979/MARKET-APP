@@ -18,10 +18,10 @@ export interface Ilist {
   quantity: number;
 }
 export interface Data {
-  id: number;
   name: string;
   description: string;
-  finalPrice: number;
-  highePrice: number;
   quantity: number;
+  price: number;
+  finalPrice: number;
+  __v: number;
 }

@@ -4,10 +4,6 @@ import { Data } from '../types';
 
 const COLUMNS: Column<Data>[] = [
   {
-    Header: 'Id',
-    accessor: 'id',
-  },
-  {
     Header: 'Nombre',
     accessor: 'name',
   },
@@ -16,12 +12,16 @@ const COLUMNS: Column<Data>[] = [
     accessor: 'description',
   },
   {
-    Header: 'Precio mayorista',
-    accessor: 'highePrice',
+    Header: 'Cantidad',
+    accessor: 'quantity',
   },
   {
     Header: 'Precio final',
     accessor: 'finalPrice',
+  },
+  {
+    Header: 'Precio por mayor',
+    accessor: 'price',
   },
 ];
 export default COLUMNS;

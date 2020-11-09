@@ -9,5 +9,8 @@
     "input4-form": "quantity",
     "input5-form": "final price",
     "button-form": "save"
+  },
+  "basicTable": {
+    "error-message": "a type error has occurred"
   }
 }

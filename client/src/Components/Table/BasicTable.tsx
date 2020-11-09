@@ -5,11 +5,13 @@ import { useTable } from 'react-table';
 import TableHead from '@material-ui/core/TableHead';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 import COLUMNS from './columns';
 import usesStyles from './style';
 import { Idarkmode, Data } from '../types';
 
 const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
+  const [t] = useTranslation('global');
   const classes = usesStyles();
   const [apiError, setApiError] = useState<string>('');
   const [dataApi, setDataApi] = useState<Data[]>([]);
@@ -19,7 +21,7 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
       const datos = res.data;
       setDataApi(datos);
     } catch (error) {
-      setApiError(`A ocurrido un error de tipo: ${error}`);
+      setApiError(`${t('basicTable.error-message')}  (${error})`);
     }
   };
   useEffect(() => {

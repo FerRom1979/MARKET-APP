@@ -1,31 +1,31 @@
-/* eslint-disable no-use-before-define */
 import React from 'react';
 import { Grid } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
-import CardHeader from '../cardHeader/index';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import usesStyles from './style';
+import BasicTable from '../Table/BasicTable';
+import ListTask from '../List/index';
+import { Idarkmode } from '../types';
 
-const Dashboard: React.FC = () => {
+const Dashboard: React.FC<Idarkmode> = ({ darkmode }) => {
   const classes = usesStyles();
+  const theme = createMuiTheme({
+    palette: {
+      type: darkmode ? 'dark' : 'light',
+    },
+  });
   return (
-    <div className={classes.root}>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <Typography variant="h4" component="h2" gutterBottom className={classes.typography}>
-            Titulo
-          </Typography>
+    <ThemeProvider theme={theme}>
+      <div className={classes.root}>
+        <Grid container spacing={1}>
+          <Grid item xs={10}>
+            <BasicTable darkmode={darkmode} />
+          </Grid>
+          <Grid item xs={2}>
+            <ListTask darkmode={darkmode} />
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={4}>
-          <CardHeader />
-        </Grid>
-        <Grid item xs={12} sm={4}>
-          <CardHeader />
-        </Grid>
-        <Grid item xs={12} sm={4}>
-          <CardHeader />
-        </Grid>
-      </Grid>
-    </div>
+      </div>
+    </ThemeProvider>
   );
 };
 

@@ -6,6 +6,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import { Modal } from '@material-ui/core';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
+import axios from 'axios';
 import useStyles from './style';
 import { Idarkmode, Inputs, Ilist } from '../types';
 
@@ -14,13 +15,28 @@ const ListTask: React.FC<Idarkmode> = ({ darkmode }) => {
   const [t] = useTranslation('global');
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
-  const [listItem, setListItem] = useState<Ilist[]>([]);
+  const [listItem, setListItem] = useState<Ilist>({
+    name: '',
+    description: '',
+    price: 0,
+    finalPrice: 0,
+    quantity: 0,
+  });
   const { handleSubmit, errors, control, register } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data: Inputs) => {
+  const onSubmit: SubmitHandler<Inputs> = async (data: Inputs) => {
     const info = data;
-    setListItem([...listItem, info]);
+    setListItem(info);
+    axios({
+      method: 'POST',
+      url: 'http://localhost:5000/products',
+      data: {
+        body: listItem,
+      },
+    }).then((res) => console.log(res.data));
   };
+
+  console.log(listItem);
 
   function rand() {
     return Math.round(Math.random() * 20) - 10;

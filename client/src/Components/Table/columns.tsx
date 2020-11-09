@@ -1,13 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
 import { Column } from 'react-table';
+import { Data } from '../types';
 
-interface Data {
-  id: string;
-  nombre: string;
-  descripcion: string;
-  precioFinal: string;
-  precioMayorista: string;
-}
 const COLUMNS: Column<Data>[] = [
   {
     Header: 'Id',
@@ -15,19 +9,19 @@ const COLUMNS: Column<Data>[] = [
   },
   {
     Header: 'Nombre',
-    accessor: 'nombre',
+    accessor: 'name',
   },
   {
     Header: 'Descripcion',
-    accessor: 'descripcion',
+    accessor: 'description',
   },
   {
     Header: 'Precio mayorista',
-    accessor: 'precioMayorista',
+    accessor: 'highePrice',
   },
   {
     Header: 'Precio final',
-    accessor: 'precioFinal',
+    accessor: 'finalPrice',
   },
 ];
 export default COLUMNS;

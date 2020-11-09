@@ -1,5 +1,13 @@
 {
   "sidemenu": {
     "title-nav": "navegacion"
+  },
+  "list": {
+    "input1-form": "id",
+    "input2-form": "descripcion",
+    "input3-form": "precio por mayos",
+    "input4-form": "cantidad",
+    "input5-form": "precio final",
+    "button-form": "cargar"
   }
 }

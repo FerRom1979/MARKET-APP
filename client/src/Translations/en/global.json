@@ -1,5 +1,13 @@
 {
   "sidemenu": {
     "title-nav": "browser"
+  },
+  "list": {
+    "input1-form": "id",
+    "input2-form": "description",
+    "input3-form": "higher price",
+    "input4-form": "quantity",
+    "input5-form": "final price",
+    "button-form": "save"
   }
 }

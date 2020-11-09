@@ -7,22 +7,12 @@ import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import { Modal } from '@material-ui/core';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { useTranslation } from 'react-i18next';
 import useStyles from './style';
+import { Idarkmode, Inputs, Ilist } from '../types';
 
-interface IBasicTable {
-  darkmode: boolean;
-}
-type Inputs = {
-  id: number;
-  description: string;
-  higherPrice: number;
-  finalPrice: number;
-  quantity: number;
-  exampleRequired: string;
-  message: string;
-};
-
-const ListTask: React.FC<IBasicTable> = ({ darkmode }) => {
+const ListTask: React.FC<Idarkmode> = ({ darkmode }) => {
+  const [t] = useTranslation('global');
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
@@ -35,13 +25,6 @@ const ListTask: React.FC<IBasicTable> = ({ darkmode }) => {
     e.target.reset();
   };
 
-  interface Ilist {
-    id: number;
-    description: string;
-    higherPrice: number;
-    finalPrice: number;
-    quantity: number;
-  }
   function rand() {
     return Math.round(Math.random() * 20) - 10;
   }
@@ -69,7 +52,7 @@ const ListTask: React.FC<IBasicTable> = ({ darkmode }) => {
           as={TextField}
           name="id"
           control={control}
-          label="id"
+          label={t('list.input1-form')}
           className={classes.Controller}
           ref={register}
           value={listItem}
@@ -79,7 +62,7 @@ const ListTask: React.FC<IBasicTable> = ({ darkmode }) => {
           as={TextField}
           name="description"
           control={control}
-          label="descripcion"
+          label={t('list.input2-form')}
           className={classes.Controller}
         />
         <span>{errors?.description?.message}</span>
@@ -87,7 +70,7 @@ const ListTask: React.FC<IBasicTable> = ({ darkmode }) => {
           as={TextField}
           name="higherPrice"
           control={control}
-          label="precio por mayor"
+          label={t('list.input3-form')}
           className={classes.Controller}
         />
         <span>{errors?.higherPrice?.message}</span>
@@ -95,7 +78,7 @@ const ListTask: React.FC<IBasicTable> = ({ darkmode }) => {
           as={TextField}
           name="quantity"
           control={control}
-          label="cantidad"
+          label={t('list.input4-form')}
           className={classes.Controller}
         />
         <span>{errors?.quantity?.message}</span>
@@ -103,7 +86,7 @@ const ListTask: React.FC<IBasicTable> = ({ darkmode }) => {
           as={TextField}
           name="finalPrice"
           control={control}
-          label="precio final"
+          label={t('list.input5-form')}
           className={classes.Controller}
         />
         <span>{errors?.finalPrice?.message}</span>
@@ -115,7 +98,7 @@ const ListTask: React.FC<IBasicTable> = ({ darkmode }) => {
           className={classes.button}
           startIcon={<SaveIcon />}
         >
-          Cagar
+          {t('list.button-form')}
         </Button>
       </form>
     </div>

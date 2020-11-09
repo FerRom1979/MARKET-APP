@@ -4,15 +4,7 @@ const primary = '#607D8B';
 const textprimaryColor = '#FFFFFF';
 const primaryTextColor = '#212121';
 const accentColor = '#FF5722';
-const Secundary = '#607D8B';
 const defaultColor = '#BDBDBD';
-/* .default-primary-color { background: #607D8B; }
-.light-primary-color   { background: #CFD8DC; }
-.text-primary-color    { color: #FFFFFF; }
-.accent-color          { background: #FF5722; }
-.primary-text-color    { color: #212121; }
-.secondary-text-color  { color: #757575; }
-.divider-color         { border-color: #BDBDBD; } */
 const drawerWidth = 140;
 const usesStyles = makeStyles((theme) => ({
   root: {
@@ -51,7 +43,7 @@ const usesStyles = makeStyles((theme) => ({
     borderBottom: '2px solid gray',
     textDecoration: 'none',
     fontSize: '15px',
-    color: Secundary,
+    color: primaryTextColor,
     '&:hover': {
       backgroundColor: accentColor,
     },

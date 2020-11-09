@@ -1,5 +1,4 @@
 /* eslint-disable react/no-array-index-key */
-/* eslint-disable no-use-before-define */
 import React, { useState } from 'react';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import TextField from '@material-ui/core/TextField';
@@ -12,17 +11,16 @@ import useStyles from './style';
 import { Idarkmode, Inputs, Ilist } from '../types';
 
 const ListTask: React.FC<Idarkmode> = ({ darkmode }) => {
-  const [t] = useTranslation('global');
   const [modalStyle] = React.useState(getModalStyle);
+  const [t] = useTranslation('global');
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
   const [listItem, setListItem] = useState<Ilist[]>([]);
   const { handleSubmit, errors, control, register } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data: Inputs, e: any) => {
+  const onSubmit: SubmitHandler<Inputs> = (data: Inputs) => {
     const info = data;
     setListItem([...listItem, info]);
-    e.target.reset();
   };
 
   function rand() {
@@ -50,14 +48,14 @@ const ListTask: React.FC<Idarkmode> = ({ darkmode }) => {
       <form onSubmit={handleSubmit(onSubmit)} className={classes.root}>
         <Controller
           as={TextField}
-          name="id"
+          name="name"
           control={control}
           label={t('list.input1-form')}
           className={classes.Controller}
           ref={register}
           value={listItem}
         />
-        <span>{errors?.id?.message}</span>
+        <span>{errors?.name?.message}</span>
         <Controller
           as={TextField}
           name="description"
@@ -68,12 +66,12 @@ const ListTask: React.FC<Idarkmode> = ({ darkmode }) => {
         <span>{errors?.description?.message}</span>
         <Controller
           as={TextField}
-          name="higherPrice"
+          name="price"
           control={control}
           label={t('list.input3-form')}
           className={classes.Controller}
         />
-        <span>{errors?.higherPrice?.message}</span>
+        <span>{errors?.price?.message}</span>
         <Controller
           as={TextField}
           name="quantity"

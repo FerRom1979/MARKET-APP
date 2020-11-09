@@ -2,18 +2,18 @@ export interface Idarkmode {
   darkmode: boolean;
 }
 export type Inputs = {
-  id: number;
+  name: string;
   description: string;
-  higherPrice: number;
+  price: number;
   finalPrice: number;
   quantity: number;
   exampleRequired: string;
   message: string;
 };
 export interface Ilist {
-  id: number;
+  name: string;
   description: string;
-  higherPrice: number;
+  price: number;
   finalPrice: number;
   quantity: number;
 }

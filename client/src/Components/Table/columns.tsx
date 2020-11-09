@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { Column } from 'react-table';
 import { Data } from '../types';
 

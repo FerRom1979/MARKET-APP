@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-use-before-define
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch as SwitchItem, Route, Link } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';

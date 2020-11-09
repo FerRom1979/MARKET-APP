@@ -3,7 +3,7 @@
     "title-nav": "navegacion"
   },
   "list": {
-    "input1-form": "id",
+    "input1-form": "nombre",
     "input2-form": "descripcion",
     "input3-form": "precio por mayos",
     "input4-form": "cantidad",

@@ -1,36 +1,31 @@
-const { Router } = require("express");
-const router = Router();
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 require("dotenv").config();
-const verifyToken = require("../controllers/verifyToken");
+const validator = require("email-validator");
 
-router.post("/signup", async (req, res, next) => {
+exports.signUp = async (req, res) => {
   const { username, email, password } = req.body;
-  const user = new User({
-    username,
-    email,
-    password,
-  });
-  user.password = await user.encryptPassword(user.password);
-  await user.save();
-  const token = jwt.sign({ id: user._id }, process.env.SECRET, {
-    expiresIn: 60 * 60 * 24,
-  });
-  console.log(user);
-  res.json({ auth: true, token });
-});
+  const testValidation = validator.validate(email);
 
-router.get("/test", verifyToken, async (req, res, next) => {
-  const user = await User.findById(req.userId, { password: 0 });
-  if (!user) {
-    return res.status(404).send("no user found");
+  if (testValidation) {
+    const user = new User({
+      username,
+      email,
+      password,
+    });
+    user.password = await user.encryptPassword(user.password);
+    await user.save();
+    const token = jwt.sign({ id: user._id }, process.env.SECRET, {
+      expiresIn: 60 * 60 * 24,
+    });
+    console.log(user);
+    res.json({ auth: true, token });
+  } else {
+    res.json({ email: "invalid" });
   }
+};
 
-  res.json(user);
-});
-
-router.post("/signin", async (req, res) => {
+exports.signIn = async (req, res) => {
   const { email, password } = req.body;
   console.log(email, password);
   const user = await User.findOne({ email });
@@ -47,6 +42,4 @@ router.post("/signin", async (req, res) => {
   });
 
   res.json({ auth: true, token });
-});
-
-module.exports = router;
+};

@@ -20,9 +20,8 @@ app.get("/", (req, res) => {
 
 /* Routes */
 app.use("/products", verifyToken, require("../routes/product.route"));
-app.use(require("../controllers/authController"));
+app.use("/", require("../routes/auth.route"));
 
-app.use("/products", require("../routes/product.route"));
 app.listen(app.get("port"), () => {
   console.log(`Server on port ${app.get("port")}`);
 });

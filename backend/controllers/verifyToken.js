@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-const config = require("../config/secret");
 require("dotenv").config();
 
 async function verifyToken(req, res, next) {

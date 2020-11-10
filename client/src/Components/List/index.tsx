@@ -18,16 +18,15 @@ const ListTask: React.FC<Idarkmode> = ({ darkmode }) => {
   const { handleSubmit, errors, control, register } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = async (data: Inputs) => {
-    const info = data;
     axios({
       method: 'POST',
       url: 'http://localhost:5000/products',
       data: {
-        name: info.name,
-        description: info.description,
-        price: Number(info.price),
-        finalPrice: Number(info.finalPrice),
-        quantity: Number(info.quantity),
+        name: data.name,
+        description: data.description,
+        price: data.price,
+        finalPrice: data.finalPrice,
+        quantity: data.quantity,
       },
     }).then((res) => console.log(res.data));
   };
@@ -75,6 +74,7 @@ const ListTask: React.FC<Idarkmode> = ({ darkmode }) => {
         <Controller
           as={TextField}
           name="price"
+          type="number"
           control={control}
           label={t('list.input3-form')}
           className={classes.Controller}
@@ -83,6 +83,7 @@ const ListTask: React.FC<Idarkmode> = ({ darkmode }) => {
         <Controller
           as={TextField}
           name="quantity"
+          type="number"
           control={control}
           label={t('list.input4-form')}
           className={classes.Controller}
@@ -91,6 +92,7 @@ const ListTask: React.FC<Idarkmode> = ({ darkmode }) => {
         <Controller
           as={TextField}
           name="finalPrice"
+          type="number"
           control={control}
           label={t('list.input5-form')}
           className={classes.Controller}

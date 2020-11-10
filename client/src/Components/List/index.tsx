@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -6,20 +6,29 @@ import SaveIcon from '@material-ui/icons/Save';
 import { Modal } from '@material-ui/core';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
+import axios from 'axios';
 import useStyles from './style';
-import { Idarkmode, Inputs, Ilist } from '../types';
+import { Idarkmode, Inputs } from '../types';
 
 const ListTask: React.FC<Idarkmode> = ({ darkmode }) => {
   const [modalStyle] = React.useState(getModalStyle);
   const [t] = useTranslation('global');
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
-  const [listItem, setListItem] = useState<Ilist[]>([]);
   const { handleSubmit, errors, control, register } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data: Inputs) => {
-    const info = data;
-    setListItem([...listItem, info]);
+  const onSubmit: SubmitHandler<Inputs> = async (data: Inputs) => {
+    axios({
+      method: 'POST',
+      url: 'http://localhost:5000/products',
+      data: {
+        name: data.name,
+        description: data.description,
+        price: data.price,
+        finalPrice: data.finalPrice,
+        quantity: data.quantity,
+      },
+    }).then((res) => console.log(res.data));
   };
 
   function rand() {
@@ -52,7 +61,6 @@ const ListTask: React.FC<Idarkmode> = ({ darkmode }) => {
           label={t('list.input1-form')}
           className={classes.Controller}
           ref={register}
-          value={listItem}
         />
         <span>{errors?.name?.message}</span>
         <Controller
@@ -66,6 +74,7 @@ const ListTask: React.FC<Idarkmode> = ({ darkmode }) => {
         <Controller
           as={TextField}
           name="price"
+          type="number"
           control={control}
           label={t('list.input3-form')}
           className={classes.Controller}
@@ -74,6 +83,7 @@ const ListTask: React.FC<Idarkmode> = ({ darkmode }) => {
         <Controller
           as={TextField}
           name="quantity"
+          type="number"
           control={control}
           label={t('list.input4-form')}
           className={classes.Controller}
@@ -82,6 +92,7 @@ const ListTask: React.FC<Idarkmode> = ({ darkmode }) => {
         <Controller
           as={TextField}
           name="finalPrice"
+          type="number"
           control={control}
           label={t('list.input5-form')}
           className={classes.Controller}

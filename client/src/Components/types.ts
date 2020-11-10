@@ -13,9 +13,9 @@ export type Inputs = {
 export interface Ilist {
   name: string;
   description: string;
+  quantity: number;
   price: number;
   finalPrice: number;
-  quantity: number;
 }
 export interface Data {
   name: string;

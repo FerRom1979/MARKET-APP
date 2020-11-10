@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -8,35 +8,29 @@ import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import useStyles from './style';
-import { Idarkmode, Inputs, Ilist } from '../types';
+import { Idarkmode, Inputs } from '../types';
 
 const ListTask: React.FC<Idarkmode> = ({ darkmode }) => {
   const [modalStyle] = React.useState(getModalStyle);
   const [t] = useTranslation('global');
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
-  const [listItem, setListItem] = useState<Ilist>({
-    name: '',
-    description: '',
-    price: 0,
-    finalPrice: 0,
-    quantity: 0,
-  });
   const { handleSubmit, errors, control, register } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = async (data: Inputs) => {
     const info = data;
-    setListItem(info);
     axios({
       method: 'POST',
       url: 'http://localhost:5000/products',
       data: {
-        body: listItem,
+        name: info.name,
+        description: info.description,
+        price: Number(info.price),
+        finalPrice: Number(info.finalPrice),
+        quantity: Number(info.quantity),
       },
     }).then((res) => console.log(res.data));
   };
-
-  console.log(listItem);
 
   function rand() {
     return Math.round(Math.random() * 20) - 10;
@@ -68,7 +62,6 @@ const ListTask: React.FC<Idarkmode> = ({ darkmode }) => {
           label={t('list.input1-form')}
           className={classes.Controller}
           ref={register}
-          value={listItem}
         />
         <span>{errors?.name?.message}</span>
         <Controller

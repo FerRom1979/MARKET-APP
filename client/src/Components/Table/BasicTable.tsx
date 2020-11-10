@@ -17,7 +17,7 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
   const [dataApi, setDataApi] = useState<Data[]>([]);
   const getData = async () => {
     try {
-      const res = await axios('http://localhost:5000/products');
+      const res = await axios('http://localhost:5000/products/');
       const datos = res.data;
       setDataApi(datos);
     } catch (error) {

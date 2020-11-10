@@ -6,8 +6,14 @@ const validator = require("email-validator");
 exports.signUp = async (req, res) => {
   const { username, email, password } = req.body;
   const testValidation = validator.validate(email);
+  const mailValidation = await User.findOne({ email });
+  const userNameValidation = await User.findOne({ username });
 
-  if (testValidation) {
+  if (
+    testValidation === true &&
+    mailValidation === null &&
+    userNameValidation === null
+  ) {
     const user = new User({
       username,
       email,
@@ -20,8 +26,17 @@ exports.signUp = async (req, res) => {
     });
     console.log(user);
     res.json({ auth: true, token });
-  } else {
+  } else if (testValidation === false) {
     res.json({ email: "invalid" });
+  } else if (mailValidation !== null && userNameValidation !== null) {
+    res.json({
+      username: "this username is already registered",
+      email: "this email is already registered",
+    });
+  } else if (mailValidation !== null) {
+    res.json({ email: "this email is already registered" });
+  } else if (userNameValidation !== null) {
+    res.json({ username: "this username is already registered" });
   }
 };
 

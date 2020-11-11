@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -9,19 +9,33 @@ import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import useStyles from './style';
-import { Idarkmode, Inputs } from '../types';
+import { Idarkmode, Inputs, Data } from '../types';
 
-const ListTask: React.FC<Idarkmode> = ({ darkmode }) => {
+const PutProducts: React.FC<Idarkmode> = ({ darkmode }) => {
   const [modalStyle] = React.useState(getModalStyle);
   const [t] = useTranslation('global');
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
   const { handleSubmit, errors, control, register } = useForm<Inputs>();
-
+  const [apiError, setApiError] = useState<string>('');
+  const [dataApi, setDataApi] = useState<Data[]>([]);
+  const getData = async () => {
+    try {
+      const res = await axios('http://localhost:5000/products');
+      setDataApi(res.data);
+    } catch (error) {
+      setApiError(`${t('basicTable.error-message')}  (${error})`);
+      console.log(apiError);
+    }
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+  console.log(dataApi);
   const onSubmit: SubmitHandler<Inputs> = async (data: Inputs) => {
     axios({
-      method: 'POST',
-      url: 'http://localhost:5000/products',
+      method: 'PUT',
+      url: 'http://localhost:5000/products/5faad8a1f9bd08bafce96e43',
       data: {
         name: data.name,
         description: data.description,
@@ -29,7 +43,9 @@ const ListTask: React.FC<Idarkmode> = ({ darkmode }) => {
         finalPrice: data.finalPrice,
         quantity: data.quantity,
       },
-    }).then((res) => console.log(res.data));
+    }).catch((err) => {
+      console.log(err);
+    });
   };
   function rand() {
     return Math.round(Math.random() * 20) - 10;
@@ -51,12 +67,15 @@ const ListTask: React.FC<Idarkmode> = ({ darkmode }) => {
   const handleClose = () => {
     setOpen(false);
   };
-  const body = (
+
+  const bodyPut = (
     <div style={modalStyle} className={classes.paper}>
+      <h3>Editar Productos</h3>
       <form onSubmit={handleSubmit(onSubmit)} className={classes.root}>
         <Controller
           as={TextField}
           name="name"
+          value={dataApi && dataApi[8].name}
           control={control}
           label={t('list.input1-form')}
           className={classes.Controller}
@@ -129,7 +148,7 @@ const ListTask: React.FC<Idarkmode> = ({ darkmode }) => {
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description"
           >
-            {body}
+            {bodyPut}
           </Modal>
         </div>
       </div>
@@ -137,4 +156,4 @@ const ListTask: React.FC<Idarkmode> = ({ darkmode }) => {
   );
 };
 
-export default ListTask;
+export default PutProducts;

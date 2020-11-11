@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 import React, { useMemo, useEffect, useState } from 'react';
 import { Table, TableContainer, TableRow, TableBody, TableCell } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
@@ -9,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import COLUMNS from './columns';
 import usesStyles from './style';
 import { Idarkmode, Data } from '../types';
+import PutProducts from '../Methods/PutProducts';
 
 const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
   const [t] = useTranslation('global');
@@ -28,7 +30,7 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
   }, []);
   const RowData: Data[] = dataApi;
   const columns = useMemo(() => COLUMNS, []);
-  const data = useMemo(() => RowData, []);
+  const data = useMemo(() => RowData, [dataApi]);
   const tableInstance = useTable({
     columns,
     data,
@@ -38,6 +40,7 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
       type: darkmode ? 'dark' : 'light',
     },
   });
+
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
   return (
     <div>
@@ -71,6 +74,9 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
         </TableContainer>
       </ThemeProvider>
       <div>{apiError && <span>{apiError}</span>}</div>
+      <span>
+        <PutProducts darkmode={darkmode} />
+      </span>
     </div>
   );
 };

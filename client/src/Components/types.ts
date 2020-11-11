@@ -18,10 +18,15 @@ export interface Ilist {
   finalPrice: number;
 }
 export interface Data {
+  _id: string;
   name: string;
   description: string;
   quantity: number;
   price: number;
   finalPrice: number;
   __v: number;
+  editar: any;
+}
+export interface IDataApi {
+  dataApi: any;
 }

@@ -24,9 +24,9 @@ const ListTask: React.FC<Idarkmode> = ({ darkmode }) => {
       data: {
         name: data.name,
         description: data.description,
+        quantity: data.quantity,
         price: data.price,
         finalPrice: data.finalPrice,
-        quantity: data.quantity,
       },
     }).then((res) => console.log(res.data));
   };

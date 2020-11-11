@@ -28,7 +28,7 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
   }, []);
   const RowData: Data[] = dataApi;
   const columns = useMemo(() => COLUMNS, []);
-  const data = useMemo(() => RowData, []);
+  const data = useMemo(() => RowData, [dataApi]);
   const tableInstance = useTable({
     columns,
     data,

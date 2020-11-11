@@ -1,20 +1,17 @@
 /* eslint-disable no-use-before-define */
-import React, { useMemo, useEffect, useState } from 'react';
-import { Table, TableContainer, TableRow, TableBody, TableCell } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
+import { TableContainer } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
-import { useTable } from 'react-table';
-import TableHead from '@material-ui/core/TableHead';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
-import COLUMNS from './columns';
-import usesStyles from './style';
+import MaterialTable from 'material-table';
 import { Idarkmode, Data } from '../types';
-import PutProducts from '../Methods/PutProducts';
+import columns from './columns';
+import tableIcons from './icons';
 
 const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
   const [t] = useTranslation('global');
-  const classes = usesStyles();
   const [apiError, setApiError] = useState<string>('');
   const [dataApi, setDataApi] = useState<Data[]>([]);
   const getData = async () => {
@@ -28,55 +25,65 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
   useEffect(() => {
     getData();
   }, []);
-  const RowData: Data[] = dataApi;
-  const columns = useMemo(() => COLUMNS, []);
-  const data = useMemo(() => RowData, [dataApi]);
-  const tableInstance = useTable({
-    columns,
-    data,
-  });
+
   const theme = createMuiTheme({
     palette: {
       type: darkmode ? 'dark' : 'light',
     },
   });
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
   return (
     <div>
       <ThemeProvider theme={theme}>
         <TableContainer component={Paper}>
-          <Table {...getTableProps()} aria-label="simple table" className={classes.table}>
-            <TableHead className={classes.head}>
-              {headerGroups.map((headerGroup) => (
-                <TableRow {...headerGroup.getFooterGroupProps()}>
-                  {headerGroup.headers.map((column) => (
-                    <TableCell {...column.getHeaderProps()} className={classes.head}>
-                      {column.render('Header')}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))}
-            </TableHead>
-            <TableBody {...getTableBodyProps()}>
-              {rows.map((row) => {
-                prepareRow(row);
-                return (
-                  <TableRow {...row.getRowProps()}>
-                    {row.cells.map((cell) => (
-                      <TableCell {...cell.getCellProps()}>{cell.render('Cell')}</TableCell>
-                    ))}
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
+          <MaterialTable
+            title="Products"
+            columns={columns}
+            data={dataApi}
+            icons={tableIcons}
+            editable={{
+              onRowAdd: (newData) =>
+                new Promise((resolve) => {
+                  setTimeout(() => {
+                    // setData([...data, newData]);
+                    console.log(newData);
+                    resolve();
+                  }, 1000);
+                }),
+              onRowUpdate: (newData, oldData) =>
+                new Promise((resolve) => {
+                  setTimeout(() => {
+                    // const dataUpdate = [...data];
+                    // const index = oldData.tableData.id;
+                    // dataUpdate[index] = newData;
+                    // setData([...dataUpdate]);
+                    console.log({ newData, oldData });
+                    resolve();
+                  }, 1000);
+                }),
+              onRowDelete: (oldData) =>
+                new Promise((resolve) => {
+                  setTimeout(() => {
+                    // const dataDelete = [...data];
+                    // const index = oldData.tableData.id;
+                    // dataDelete.splice(index, 1);
+                    // setData([...dataDelete]);
+                    console.log(oldData);
+                    resolve();
+                  }, 1000);
+                }),
+            }}
+            options={{
+              sorting: true,
+              headerStyle: {
+                backgroundColor: '#01579b',
+                color: '#FFF',
+              },
+            }}
+          />
         </TableContainer>
       </ThemeProvider>
       <div>{apiError && <span>{apiError}</span>}</div>
-      <span>
-        <PutProducts darkmode={darkmode} />
-      </span>
     </div>
   );
 };

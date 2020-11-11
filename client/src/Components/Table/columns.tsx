@@ -1,38 +1,34 @@
-/* eslint-disable no-use-before-define */
-/* eslint-disable react/button-has-type */
-import { Button } from '@material-ui/core';
-import React from 'react';
-import { Column } from 'react-table';
-import { Data } from '../types';
+type IType = 'string' | 'boolean' | 'numeric' | 'date' | 'datetime' | 'time' | 'currency';
+const string: IType = 'string';
+const numeric: IType = 'numeric';
+const currency: IType = 'currency';
 
-const COLUMNS: Column<Data>[] = [
+const columns = [
   {
-    Header: 'Nombre',
-    accessor: 'name',
+    title: 'Name',
+    field: 'name',
+    type: string,
   },
   {
-    Header: 'Descripcion',
-    accessor: 'description',
+    title: 'Description',
+    field: 'description',
+    type: string,
   },
   {
-    Header: 'Cantidad',
-    accessor: 'quantity',
+    title: 'Cantidad',
+    field: 'quantity',
+    type: numeric,
   },
   {
-    Header: 'Precio final',
-    accessor: 'finalPrice',
+    title: 'Precio final',
+    field: 'finalPrice',
+    type: currency,
   },
   {
-    Header: 'Precio por mayor',
-    accessor: 'price',
-  },
-  {
-    Header: 'Editar',
-    accessor: 'editar',
-    Cell: (apiData) => (
-      <Button onClick={() => console.log(apiData.row.original._id)}>cargar</Button>
-    ),
+    title: 'Precio por mayor',
+    field: 'price',
+    type: currency,
   },
 ];
-export default COLUMNS;
-/*  */
+
+export default columns;

@@ -10,7 +10,7 @@ const columns = [
     type: string,
   },
   {
-    title: 'Description',
+    title: 'Descripcion',
     field: 'description',
     type: string,
   },

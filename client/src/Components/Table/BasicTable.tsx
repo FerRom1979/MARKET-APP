@@ -13,11 +13,11 @@ import tableIcons from './icons';
 const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
   const [t] = useTranslation('global');
   const [apiError, setApiError] = useState<string>('');
-  const [dataApi, setDataApi] = useState<Data[]>([]);
+  const [data, setData] = useState<Data[]>([]);
   const getData = async () => {
     try {
-      const res = await axios('http://localhost:5000/products');
-      setDataApi(res.data);
+      const res = await axios('http://localhost:5000/products/');
+      setData(res.data);
     } catch (error) {
       setApiError(`${t('basicTable.error-message')}  (${error})`);
     }
@@ -39,40 +39,64 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
           <MaterialTable
             title="Products"
             columns={columns}
-            data={dataApi}
-            icons={tableIcons}
+            data={data}
             editable={{
               onRowAdd: (newData) =>
                 new Promise((resolve) => {
                   setTimeout(() => {
-                    // setData([...data, newData]);
-                    console.log(newData);
+                    setData([...data, newData]);
+                    const { description, finalPrice, name, price, quantity } = newData;
+                    resolve();
+                    axios({
+                      method: 'POST',
+                      url: 'http://localhost:5000/products',
+                      data: {
+                        name,
+                        description,
+                        quantity,
+                        price,
+                        finalPrice,
+                      },
+                    }).then((res) => console.log(res.data));
                     resolve();
                   }, 1000);
                 }),
+
               onRowUpdate: (newData, oldData) =>
                 new Promise((resolve) => {
+                  console.log(newData, oldData);
                   setTimeout(() => {
-                    // const dataUpdate = [...data];
-                    // const index = oldData.tableData.id;
-                    // dataUpdate[index] = newData;
-                    // setData([...dataUpdate]);
-                    console.log({ newData, oldData });
+                    const { _id, description, finalPrice, name, price, quantity } = newData;
+                    resolve();
+                    axios
+                      .put(`http://localhost:5000/products/${_id}`, {
+                        name,
+                        description,
+                        quantity,
+                        price,
+                        finalPrice,
+                      })
+                      .then((res) => {
+                        console.log(res);
+                        getData();
+                      });
                     resolve();
                   }, 1000);
                 }),
               onRowDelete: (oldData) =>
                 new Promise((resolve) => {
                   setTimeout(() => {
-                    // const dataDelete = [...data];
-                    // const index = oldData.tableData.id;
-                    // dataDelete.splice(index, 1);
-                    // setData([...dataDelete]);
-                    console.log(oldData);
+                    const { _id } = oldData;
+                    resolve();
+                    axios.delete(`http://localhost:5000/products/${_id}`).then((res) => {
+                      console.log(res);
+                      getData();
+                    });
                     resolve();
                   }, 1000);
                 }),
             }}
+            icons={tableIcons}
             options={{
               sorting: true,
               headerStyle: {

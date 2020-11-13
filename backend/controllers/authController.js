@@ -58,3 +58,11 @@ exports.signIn = async (req, res) => {
 
   res.json({ auth: true, token });
 };
+
+exports.signOut = async (req, res) => {
+  res.cookie("token", "none", {
+    expires: new Date(Date.now() + 5 * 1000),
+    httpOnly: true,
+  });
+  res.status(200).json({ message: "User logged out successfully" });
+};

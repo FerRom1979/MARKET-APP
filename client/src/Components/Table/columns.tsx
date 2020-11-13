@@ -1,26 +1,34 @@
-import { Column } from 'react-table';
-import { Data } from '../types';
+type IType = 'string' | 'boolean' | 'numeric' | 'date' | 'datetime' | 'time' | 'currency';
+const string: IType = 'string';
+const numeric: IType = 'numeric';
+const currency: IType = 'currency';
 
-const COLUMNS: Column<Data>[] = [
+const columns = [
   {
-    Header: 'Nombre',
-    accessor: 'name',
+    title: 'Name',
+    field: 'name',
+    type: string,
   },
   {
-    Header: 'Descripcion',
-    accessor: 'description',
+    title: 'Descripcion',
+    field: 'description',
+    type: string,
   },
   {
-    Header: 'Cantidad',
-    accessor: 'quantity',
+    title: 'Cantidad',
+    field: 'quantity',
+    type: numeric,
   },
   {
-    Header: 'Precio final',
-    accessor: 'finalPrice',
+    title: 'Precio final',
+    field: 'finalPrice',
+    type: currency,
   },
   {
-    Header: 'Precio por mayor',
-    accessor: 'price',
+    title: 'Precio por mayor',
+    field: 'price',
+    type: currency,
   },
 ];
-export default COLUMNS;
+
+export default columns;

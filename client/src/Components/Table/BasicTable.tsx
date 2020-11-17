@@ -31,7 +31,9 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
       type: darkmode ? 'dark' : 'light',
     },
   });
-
+  const closeSesion = () => {
+    window.location.href = './';
+  };
   return (
     <div>
       <ThemeProvider theme={theme}>
@@ -107,6 +109,9 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
           />
         </TableContainer>
       </ThemeProvider>
+      <button type="submit" onClick={closeSesion}>
+        cerrar Sesion
+      </button>
       <div>{apiError && <span>{apiError}</span>}</div>
     </div>
   );

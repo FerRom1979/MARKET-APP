@@ -45,16 +45,24 @@ exports.signIn = async (req, res) => {
   console.log(email, password);
   const user = await User.findOne({ email });
   if (!user) {
-    return res.status(404).send("the mail doesn´t exists");
+    return res.status(404).json("the mail doesn´t exists");
   }
   const validPassword = await user.validatePassword(password);
   if (!validPassword) {
-    return res.status(401).json({ auth: false, token: null });
+    return res.status(401).json({ message: "Incorrect password" });
   }
 
   const token = jwt.sign({ id: user._id }, process.env.SECRET, {
-    expiresIn: 60 * 60 * 24,
+    expiresIn: 60 * 60 * 24 * 7,
   });
 
   res.json({ auth: true, token });
+};
+
+exports.signOut = async (req, res) => {
+  res.cookie("token", "none", {
+    expires: new Date(Date.now() + 5 * 1000),
+    httpOnly: true,
+  });
+  res.status(200).json({ message: "User logged out successfully" });
 };

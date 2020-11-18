@@ -14,16 +14,23 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
   const [t] = useTranslation('global');
   const [apiError, setApiError] = useState<string>('');
   const [data, setData] = useState<Data[]>([]);
-  const getData = async () => {
-    try {
-      const res = await axios('http://localhost:5000/products/');
-      setData(res.data);
-    } catch (error) {
-      setApiError(`${t('basicTable.error-message')}  (${error})`);
+  const getToken = () => {
+    const token = localStorage.getItem('my-token');
+    console.log(token);
+
+    if (token) {
+      try {
+        axios.get('http://localhost:5000/products/', {
+          headers: { 'x-access-token': token },
+        });
+        setData(data);
+      } catch (error) {
+        setApiError(`${t('basicTable.error-message')}  (${error})`);
+      }
     }
   };
   useEffect(() => {
-    getData();
+    getToken();
   }, []);
 
   const theme = createMuiTheme({
@@ -80,7 +87,7 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
                       })
                       .then((res) => {
                         console.log(res);
-                        getData();
+                        /* getData(); */
                       });
                     resolve();
                   }, 1000);
@@ -92,7 +99,7 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
                     resolve();
                     axios.delete(`http://localhost:5000/products/${_id}`).then((res) => {
                       console.log(res);
-                      getData();
+                      /*  getData(); */
                     });
                     resolve();
                   }, 1000);

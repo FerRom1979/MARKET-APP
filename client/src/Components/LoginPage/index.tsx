@@ -3,11 +3,13 @@
 /* eslint-disable no-use-before-define */
 import React, { useState } from 'react';
 import axios from 'axios';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import { Typography } from '@material-ui/core';
 import usesStyles from './style';
 
 const Login: React.FC = () => {
   const classes = usesStyles();
-  const [loginUsername, setLoginUsername] = useState<string>('');
   const [loginPassword, setLoginPassword] = useState<string>('');
   const [loginUserEmail, setLoginUserEmail] = useState<string>('');
   const [login, setLogin] = useState<boolean>(true);
@@ -22,13 +24,19 @@ const Login: React.FC = () => {
       method: 'POST',
       url: 'http://localhost:5000/signin',
       data: {
-        name: loginUsername,
         email: loginUserEmail,
         password: loginPassword,
       },
-    }).catch((err) => {
-      console.log(err);
-    });
+    })
+      .then((response) => {
+        console.log(response.status);
+        if (response.status === 200) {
+          window.location.href = './sidemenu';
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   const sinUp = async () => {
     await axios({
@@ -40,10 +48,11 @@ const Login: React.FC = () => {
         password,
       },
     }).then((response) => {
-      console.log(response.status);
+      console.log(response);
 
       if (response.status === 200) {
         setLogin(true);
+        window.location.href = './sidemenu';
       }
     });
   };
@@ -52,80 +61,99 @@ const Login: React.FC = () => {
     <div className={classes.root}>
       {login ? (
         <>
+          <Typography variant="h5" component="h2">
+            Iniciar Sesion con su correo
+          </Typography>
           <div className={classes.login}>
-            <label>Usuario:</label>
-            <br />
-            <input
-              type="text"
-              name="username"
-              placeholder="Ingrese su usuario"
-              onChange={(e) => setLoginUsername(e.target.value)}
-            />
-            <br />
-            <label>Email:</label>
-            <br />
-            <input
+            <TextField
+              variant="outlined"
+              id="standard-basic"
+              label="Email"
               type="email"
               name="email"
-              placeholder="Ingrese su mail"
               onChange={(e) => setLoginUserEmail(e.target.value)}
+              className={classes.input}
             />
-            <br />
-            <label>Password:</label>
-            <br />
-            <input
+
+            <TextField
+              variant="outlined"
+              id="standard-basic"
+              label="contraseña"
               type="password"
               name="password"
-              placeholder="Ingrese su contraseña"
               onChange={(e) =>
                 e.target.value.length < 6
                   ? setpasswordError(true)
                   : (setLoginPassword(e.target.value), setpasswordError(false))
               }
+              className={classes.input}
             />
+
             <div>{passwordError && <span>La contraseña deve tener almenos 6 caracters</span>}</div>
             <br />
-            <button type="submit" onClick={getLogin}>
-              Iniciar Sesion
-            </button>
-            <button type="submit" onClick={() => setLogin(false)}>
-              Registrarte
-            </button>
+            <div>
+              <Button
+                variant="contained"
+                type="submit"
+                onClick={getLogin}
+                className={classes.button}
+              >
+                Iniciar Sesion
+              </Button>
+            </div>
+            <br />
+            <div>
+              <Button
+                variant="contained"
+                type="submit"
+                onClick={() => setLogin(false)}
+                className={classes.button}
+              >
+                Registrarce
+              </Button>
+            </div>
+            <br />
           </div>
           {/* <div>{errorLogin && <span>{errorLogin}</span>}</div> */}
         </>
       ) : (
         <div className={classes.login}>
-          <label>Usuario:</label>
-          <br />
-          <input
+          <TextField
+            variant="outlined"
+            id="standard-basic"
+            label="Usuario"
             type="text"
             name="username"
-            placeholder="Nombre de Usuario"
             onChange={(e) => setUser(e.target.value)}
+            className={classes.input}
           />
           <br />
-          <label>Email:</label>
-          <br />
-          <input
+
+          <TextField
+            variant="outlined"
+            id="standard-basic"
+            label="Email"
             type="email"
             name="email"
-            placeholder="Correo electrónico"
             onChange={(e) => setEmail(e.target.value)}
+            className={classes.input}
           />
           <br />
           <label>Password:</label>
           <br />
-          <input
+          <TextField
+            variant="outlined"
+            id="standard-basic"
+            label="Contrasña"
             type="password"
             name="password"
-            placeholder="Contraseña"
             onChange={(e) => setPassword(e.target.value)}
+            className={classes.input}
           />
           <br />
-          <button type="submit" onClick={sinUp}>
+          <Button variant="contained" type="submit" onClick={sinUp}>
             Registrarce
-          </button>
+          </Button>
         </div>
       )}
     </div>

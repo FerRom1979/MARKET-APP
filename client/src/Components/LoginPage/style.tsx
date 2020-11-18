@@ -2,15 +2,28 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
   root: {
-    width: '100%',
-    display: 'inlineFlex',
+    width: 400,
+    height: 500,
+    display: 'Flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    background: 'red',
+    marginLeft: '40%',
+    marginTop: '20%',
+    border: 'solid 1px black',
+    textAlign: 'center',
+    alignContent: 'center',
+    borderRadius: 5,
   },
   login: {
-    maxWidth: '200px',
+    Width: '100%',
+  },
+  button: {
+    padding: 10,
+  },
+  input: {
+    paddingTop: 10,
+    width: '90%',
   },
 }));
 

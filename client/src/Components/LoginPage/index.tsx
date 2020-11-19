@@ -18,6 +18,12 @@ const Login: React.FC = () => {
   const [user, setUser] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [email, setEmail] = useState<string>('');
+  // Esto es para chequear el token activo
+  const storedJwt = localStorage.getItem('token');
+  const [jwt, setJwt] = useState(storedJwt || null);
+
+  console.log(storedJwt);
+  console.log(jwt);
 
   const getLogin = async () => {
     await axios({
@@ -29,15 +35,20 @@ const Login: React.FC = () => {
       },
     })
       .then((response) => {
-        console.log(response.status);
-        if (response.status === 200) {
-          window.location.href = './sidemenu';
-        }
+        // Aca se guarda el token en el storage y en el state
+        localStorage.setItem('token', response.data.token);
+        setJwt(response.data.token);
+
+        // Reemplaza esto con router
+        // if (response.status === 200) {
+        //   window.location.href = './sidemenu';
+        // }
       })
       .catch((err) => {
         console.log(err);
       });
   };
+  // Es signup
   const sinUp = async () => {
     await axios({
       method: 'POST',
@@ -49,7 +60,7 @@ const Login: React.FC = () => {
       },
     }).then((response) => {
       console.log(response);
-
+      // Reemplaza esto con router
       if (response.status === 200) {
         setLogin(true);
         window.location.href = './sidemenu';
@@ -88,7 +99,7 @@ const Login: React.FC = () => {
               }
               className={classes.input}
             />
-
+            {/* Debe */}
             <div>{passwordError && <span>La contraseña deve tener almenos 6 caracters</span>}</div>
             <br />
             <div>
@@ -109,6 +120,7 @@ const Login: React.FC = () => {
                 onClick={() => setLogin(false)}
                 className={classes.button}
               >
+                {/* Registrarse */}
                 Registrarce
               </Button>
             </div>
@@ -151,7 +163,9 @@ const Login: React.FC = () => {
             className={classes.input}
           />
           <br />
+          {/* signUp */}
           <Button variant="contained" type="submit" onClick={sinUp}>
+            {/* Registrarse */}
             Registrarce
           </Button>
         </div>

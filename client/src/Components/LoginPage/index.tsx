@@ -3,6 +3,7 @@
 /* eslint-disable no-use-before-define */
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { Typography } from '@material-ui/core';
@@ -10,6 +11,7 @@ import usesStyles from './style';
 
 const Login: React.FC = () => {
   const classes = usesStyles();
+  const history = useHistory();
   const [loginPassword, setLoginPassword] = useState<string>('');
   const [loginUserEmail, setLoginUserEmail] = useState<string>('');
   const [login, setLogin] = useState<boolean>(true);
@@ -21,7 +23,6 @@ const Login: React.FC = () => {
   // Esto es para chequear el token activo
   const storedJwt = localStorage.getItem('token');
   const [jwt, setJwt] = useState(storedJwt || null);
-
   console.log(storedJwt);
   console.log(jwt);
 
@@ -36,20 +37,21 @@ const Login: React.FC = () => {
     })
       .then((response) => {
         // Aca se guarda el token en el storage y en el state
+        if (response.status === 200) {
+          setLogin(true);
+          setTimeout(() => {
+            history.push('/sidemenu');
+          }, 1000);
+        }
         localStorage.setItem('token', response.data.token);
-        setJwt(response.data.token);
 
-        // Reemplaza esto con router
-        // if (response.status === 200) {
-        //   window.location.href = './sidemenu';
-        // }
+        setJwt(response.data.token);
       })
       .catch((err) => {
         console.log(err);
       });
   };
-  // Es signup
-  const sinUp = async () => {
+  const signUp = async () => {
     await axios({
       method: 'POST',
       url: 'http://localhost:5000/signup/',
@@ -60,10 +62,11 @@ const Login: React.FC = () => {
       },
     }).then((response) => {
       console.log(response);
-      // Reemplaza esto con router
       if (response.status === 200) {
         setLogin(true);
-        window.location.href = './sidemenu';
+        setTimeout(() => {
+          history.push('/sidemenu');
+        }, 1000);
       }
     });
   };
@@ -99,8 +102,7 @@ const Login: React.FC = () => {
               }
               className={classes.input}
             />
-            {/* Debe */}
-            <div>{passwordError && <span>La contraseña deve tener almenos 6 caracters</span>}</div>
+            <div>{passwordError && <span>La contraseña debe tener almenos 6 caracters</span>}</div>
             <br />
             <div>
               <Button
@@ -120,8 +122,7 @@ const Login: React.FC = () => {
                 onClick={() => setLogin(false)}
                 className={classes.button}
               >
-                {/* Registrarse */}
-                Registrarce
+                Registrarse
               </Button>
             </div>
             <br />
@@ -163,10 +164,8 @@ const Login: React.FC = () => {
             className={classes.input}
           />
           <br />
-          {/* signUp */}
-          <Button variant="contained" type="submit" onClick={sinUp}>
-            {/* Registrarse */}
-            Registrarce
+          <Button variant="contained" type="submit" onClick={signUp}>
+            Registrarse
           </Button>
         </div>
       )}

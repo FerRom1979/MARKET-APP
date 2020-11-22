@@ -1,5 +1,6 @@
 /* eslint-disable no-use-before-define */
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { TableContainer } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -12,25 +13,21 @@ import tableIcons from './icons';
 
 const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
   const [t] = useTranslation('global');
+  const history = useHistory();
   const [apiError, setApiError] = useState<string>('');
   const [data, setData] = useState<Data[]>([]);
-  const getToken = () => {
-    const token = localStorage.getItem('my-token');
-    console.log(token);
+  /*  const token = localStorage.getItem('token'); */
 
-    if (token) {
-      try {
-        axios.get('http://localhost:5000/products/', {
-          headers: { 'x-access-token': token },
-        });
-        setData(data);
-      } catch (error) {
-        setApiError(`${t('basicTable.error-message')}  (${error})`);
-      }
+  const getData = async () => {
+    try {
+      await axios.get('http://localhost:5000/products');
+      setData(data);
+    } catch (error) {
+      setApiError(`${t('basicTable.error-message')}  (${error})`);
     }
   };
   useEffect(() => {
-    getToken();
+    getData();
   }, []);
 
   const theme = createMuiTheme({
@@ -39,7 +36,9 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
     },
   });
   const closeSesion = () => {
-    window.location.href = './';
+    setTimeout(() => {
+      history.push('/');
+    }, 1000);
   };
   return (
     <div>
@@ -87,7 +86,7 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
                       })
                       .then((res) => {
                         console.log(res);
-                        /* getData(); */
+                        getData();
                       });
                     resolve();
                   }, 1000);
@@ -99,7 +98,7 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
                     resolve();
                     axios.delete(`http://localhost:5000/products/${_id}`).then((res) => {
                       console.log(res);
-                      /*  getData(); */
+                      getData();
                     });
                     resolve();
                   }, 1000);

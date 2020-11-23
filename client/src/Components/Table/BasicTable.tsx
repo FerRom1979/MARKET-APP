@@ -16,23 +16,12 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
   const history = useHistory();
   const [apiError, setApiError] = useState<string>('');
   const [data, setData] = useState<Data[]>([]);
-  const token = localStorage.getItem('token');
-  console.log(token);
+  /*  const token = localStorage.getItem('token'); */
 
-  const closeSesion = () => {
-    setTimeout(() => {
-      history.push('/');
-    }, 1000);
-  };
   const getData = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/products', {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: token,
-        },
-      });
-      setData(res.data);
+      await axios.get('http://localhost:5000/products');
+      setData(data);
     } catch (error) {
       setApiError(`${t('basicTable.error-message')}  (${error})`);
     }
@@ -40,13 +29,17 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
   useEffect(() => {
     getData();
   }, []);
-  console.log(data);
 
   const theme = createMuiTheme({
     palette: {
       type: darkmode ? 'dark' : 'light',
     },
   });
+  const closeSesion = () => {
+    setTimeout(() => {
+      history.push('/');
+    }, 1000);
+  };
   return (
     <div>
       <ThemeProvider theme={theme}>

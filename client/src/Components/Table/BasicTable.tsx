@@ -16,16 +16,15 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
   /* const history = useHistory(); */
   const [apiError, setApiError] = useState<string>('');
   const [data, setData] = useState<Data[]>([]);
-  /*   const token = localStorage.getItem('token');
-  const [newToken, setNewToken] = useState<string>(''); */
-  const getData = async () => {
+  const token = localStorage.getItem('token');
+
+  // Lo que hice fue pasarle el token por parametro y ponerlo en el array  de dependencias del effect, cosa que cuando exista dispare la request
+  const getData = async (bearerToken: string | null) => {
     try {
       const res = await axios.get('http://localhost:5000/products', {
         headers: {
           'Content-Type': 'application/json',
-          Authorization:
-            // eslint-disable-next-line max-len
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjNlN2ZkZDU2OGYyMGFhMzMxZjVjNiIsImlhdCI6MTYwNjM5MDU2OSwiZXhwIjoxNjA2OTk1MzY5fQ.PKmefjfUPKhI-rtKH_qy9L90myddfmd3fT256l9cc7Q',
+          Authorization: bearerToken,
         },
       });
 
@@ -35,8 +34,9 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
     }
   };
   useEffect(() => {
-    getData();
-  }, []);
+    // Aca le pase el token
+    getData(token);
+  }, [token]);
 
   const theme = createMuiTheme({
     palette: {
@@ -95,7 +95,7 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
                       })
                       .then((res) => {
                         console.log(res);
-                        getData();
+                        getData(token);
                       });
                     resolve();
                   }, 1000);
@@ -105,10 +105,17 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
                   setTimeout(() => {
                     const { _id } = oldData;
                     resolve();
-                    axios.delete(`http://localhost:5000/products/${_id}`).then((res) => {
-                      console.log(res);
-                      getData();
-                    });
+                    axios
+                      .delete(`http://localhost:5000/products/${_id}`, {
+                        headers: {
+                          'Content-Type': 'application/json',
+                          Authorization: token,
+                        },
+                      })
+                      .then((res) => {
+                        console.log(res);
+                        getData(token);
+                      });
                     resolve();
                   }, 1000);
                 }),

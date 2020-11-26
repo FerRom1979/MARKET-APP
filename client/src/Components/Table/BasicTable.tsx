@@ -1,6 +1,6 @@
 /* eslint-disable no-use-before-define */
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+/* import { useHistory } from 'react-router-dom'; */
 import { TableContainer } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -13,15 +13,23 @@ import tableIcons from './icons';
 
 const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
   const [t] = useTranslation('global');
-  const history = useHistory();
+  /* const history = useHistory(); */
   const [apiError, setApiError] = useState<string>('');
   const [data, setData] = useState<Data[]>([]);
-  /*  const token = localStorage.getItem('token'); */
-
+  /*   const token = localStorage.getItem('token');
+  const [newToken, setNewToken] = useState<string>(''); */
   const getData = async () => {
     try {
-      await axios.get('http://localhost:5000/products');
-      setData(data);
+      const res = await axios.get('http://localhost:5000/products', {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization:
+            // eslint-disable-next-line max-len
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjNlN2ZkZDU2OGYyMGFhMzMxZjVjNiIsImlhdCI6MTYwNjM5MDU2OSwiZXhwIjoxNjA2OTk1MzY5fQ.PKmefjfUPKhI-rtKH_qy9L90myddfmd3fT256l9cc7Q',
+        },
+      });
+
+      setData(res.data);
     } catch (error) {
       setApiError(`${t('basicTable.error-message')}  (${error})`);
     }
@@ -36,9 +44,10 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
     },
   });
   const closeSesion = () => {
-    setTimeout(() => {
+    window.location.href = '/';
+    /* setTimeout(() => {
       history.push('/');
-    }, 1000);
+    }, 1000); */
   };
   return (
     <div>

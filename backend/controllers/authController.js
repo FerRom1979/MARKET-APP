@@ -23,7 +23,7 @@ exports.signUp = async (req, res) => {
     });
     user.password = await user.encryptPassword(user.password);
     await user.save();
-    const token = jwt.sign({ id: user._id }, "secret-text", {
+    const token = jwt.sign({ id: user._id }, process.env.SECRET, {
       expiresIn: 60 * 60 * 24,
     });
     console.log(user);
@@ -60,7 +60,7 @@ exports.signIn = async (req, res) => {
     return res.status(404).json({ message: "Incorrect password" });
   }
 
-  const token = jwt.sign({ id: user._id }," secret-text", {
+  const token = jwt.sign({ id: user._id }, process.env.SECRET, {
     expiresIn: 60 * 60 * 24 * 7,
   });
 

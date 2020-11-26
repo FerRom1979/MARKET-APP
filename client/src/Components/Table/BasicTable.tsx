@@ -1,5 +1,6 @@
 /* eslint-disable no-use-before-define */
 import React, { useEffect, useState } from 'react';
+/* import { useHistory } from 'react-router-dom'; */
 import { TableContainer } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -12,26 +13,42 @@ import tableIcons from './icons';
 
 const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
   const [t] = useTranslation('global');
+  /* const history = useHistory(); */
   const [apiError, setApiError] = useState<string>('');
   const [data, setData] = useState<Data[]>([]);
-  const getData = async () => {
+  const token = localStorage.getItem('token');
+
+  // Lo que hice fue pasarle el token por parametro y ponerlo en el array  de dependencias del effect, cosa que cuando exista dispare la request
+  const getData = async (bearerToken: string | null) => {
     try {
-      const res = await axios('http://localhost:5000/products/');
+      const res = await axios.get('http://localhost:5000/products', {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: bearerToken,
+        },
+      });
+
       setData(res.data);
     } catch (error) {
       setApiError(`${t('basicTable.error-message')}  (${error})`);
     }
   };
   useEffect(() => {
-    getData();
-  }, []);
+    // Aca le pase el token
+    getData(token);
+  }, [token]);
 
   const theme = createMuiTheme({
     palette: {
       type: darkmode ? 'dark' : 'light',
     },
   });
-
+  const closeSesion = () => {
+    window.location.href = '/';
+    /* setTimeout(() => {
+      history.push('/');
+    }, 1000); */
+  };
   return (
     <div>
       <ThemeProvider theme={theme}>
@@ -78,7 +95,7 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
                       })
                       .then((res) => {
                         console.log(res);
-                        getData();
+                        getData(token);
                       });
                     resolve();
                   }, 1000);
@@ -88,10 +105,17 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
                   setTimeout(() => {
                     const { _id } = oldData;
                     resolve();
-                    axios.delete(`http://localhost:5000/products/${_id}`).then((res) => {
-                      console.log(res);
-                      getData();
-                    });
+                    axios
+                      .delete(`http://localhost:5000/products/${_id}`, {
+                        headers: {
+                          'Content-Type': 'application/json',
+                          Authorization: token,
+                        },
+                      })
+                      .then((res) => {
+                        console.log(res);
+                        getData(token);
+                      });
                     resolve();
                   }, 1000);
                 }),
@@ -107,6 +131,9 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
           />
         </TableContainer>
       </ThemeProvider>
+      <button type="submit" onClick={closeSesion}>
+        cerrar Sesion
+      </button>
       <div>{apiError && <span>{apiError}</span>}</div>
     </div>
   );

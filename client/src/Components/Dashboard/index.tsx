@@ -17,7 +17,7 @@ const Dashboard: React.FC<Idarkmode> = ({ darkmode }) => {
     <ThemeProvider theme={theme}>
       <div className={classes.root}>
         <Grid container spacing={1}>
-          <Grid item xs={10}>
+          <Grid item xs={12} sm={10}>
             <BasicTable darkmode={darkmode} />
           </Grid>
         </Grid>

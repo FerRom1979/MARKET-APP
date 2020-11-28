@@ -1,7 +1,6 @@
 /* eslint-disable no-use-before-define */
 import React, { useEffect, useState } from 'react';
-/* import { useHistory } from 'react-router-dom'; */
-import { TableContainer } from '@material-ui/core';
+import { Button, TableContainer } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import axios from 'axios';
@@ -13,7 +12,6 @@ import tableIcons from './icons';
 
 const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
   const [t] = useTranslation('global');
-  /* const history = useHistory(); */
   const [apiError, setApiError] = useState<string>('');
   const [data, setData] = useState<Data[]>([]);
   const token = localStorage.getItem('token');
@@ -43,18 +41,15 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
       type: darkmode ? 'dark' : 'light',
     },
   });
-  const closeSesion = () => {
+  const singOff = () => {
     window.location.href = '/';
-    /* setTimeout(() => {
-      history.push('/');
-    }, 1000); */
   };
   return (
     <div>
       <ThemeProvider theme={theme}>
         <TableContainer component={Paper}>
           <MaterialTable
-            title="Products"
+            title="Productos"
             columns={columns}
             data={data}
             editable={{
@@ -74,29 +69,36 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
                         price,
                         finalPrice,
                       },
-                    }).then((res) => console.log(res.data));
-                    resolve();
+                      headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: token,
+                      },
+                    });
                   }, 1000);
                 }),
 
-              onRowUpdate: (newData, oldData) =>
+              onRowUpdate: (newData) =>
                 new Promise((resolve) => {
-                  console.log(newData, oldData);
                   setTimeout(() => {
                     const { _id, description, finalPrice, name, price, quantity } = newData;
                     resolve();
-                    axios
-                      .put(`http://localhost:5000/products/${_id}`, {
+                    axios({
+                      method: 'PUT',
+                      url: `http://localhost:5000/products/${_id}`,
+                      headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: token,
+                      },
+                      data: {
                         name,
                         description,
                         quantity,
                         price,
                         finalPrice,
-                      })
-                      .then((res) => {
-                        console.log(res);
-                        getData(token);
-                      });
+                      },
+                    }).then(() => {
+                      getData(token);
+                    });
                     resolve();
                   }, 1000);
                 }),
@@ -112,8 +114,7 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
                           Authorization: token,
                         },
                       })
-                      .then((res) => {
-                        console.log(res);
+                      .then(() => {
                         getData(token);
                       });
                     resolve();
@@ -131,9 +132,9 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
           />
         </TableContainer>
       </ThemeProvider>
-      <button type="submit" onClick={closeSesion}>
-        cerrar Sesion
-      </button>
+      <Button type="submit" onClick={singOff} variant="contained" color="primary">
+        Cerrar Sesion
+      </Button>
       <div>{apiError && <span>{apiError}</span>}</div>
     </div>
   );

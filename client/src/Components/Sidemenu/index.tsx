@@ -9,7 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import MenuIcon from '@material-ui/icons/Menu';
-import PublicIcon from '@material-ui/icons/Public';
+import ReorderIcon from '@material-ui/icons/Reorder';
 import LanguageIcon from '@material-ui/icons/Language';
 import ForwardIcon from '@material-ui/icons/Forward';
 import CloseIcon from '@material-ui/icons/Close';
@@ -57,8 +57,8 @@ const SideMenu: React.FC = () => {
           <List>
             <Link to="/">
               <ListItem onClick={closeDrawer} className={classes.listItem}>
-                <PublicIcon className={classes.icons} />
-                text
+                <ReorderIcon className={classes.icons} />
+                Tabla de Productos
               </ListItem>
             </Link>
             <Link to="/seccion2">

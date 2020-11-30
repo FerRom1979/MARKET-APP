@@ -73,6 +73,8 @@ const Login: React.FC = () => {
           setTimeout(() => {
             history.push('/sidemenu');
           }, 1000);
+          localStorage.setItem('token', response.data.token);
+          setJwt(response.data.token);
         }
       });
     } catch (error) {

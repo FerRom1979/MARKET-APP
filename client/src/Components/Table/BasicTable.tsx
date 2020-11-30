@@ -42,6 +42,8 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
     },
   });
   const singOff = () => {
+    window.localStorage.clear();
+    window.sessionStorage.clear();
     window.location.href = '/';
   };
   return (

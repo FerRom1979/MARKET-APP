@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
   table: {
-    minWidth: '50vh',
+    minWidth: '100vh',
   },
   head: {
     backgroundColor: 'black',

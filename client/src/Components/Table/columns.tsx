@@ -5,7 +5,7 @@ const currency: IType = 'currency';
 
 const columns = [
   {
-    title: 'Name',
+    title: 'Marca',
     field: 'name',
     type: string,
   },
@@ -20,13 +20,14 @@ const columns = [
     type: numeric,
   },
   {
-    title: 'Precio final',
-    field: 'finalPrice',
+    title: 'Precio x mayor',
+    field: 'price',
+
     type: currency,
   },
   {
-    title: 'Precio por mayor',
-    field: 'price',
+    title: 'Precio final',
+    field: 'finalPrice',
     type: currency,
   },
 ];

@@ -7,11 +7,15 @@ import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
+import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
 import MenuIcon from '@material-ui/icons/Menu';
 import ReorderIcon from '@material-ui/icons/Reorder';
-import LanguageIcon from '@material-ui/icons/Language';
-import ForwardIcon from '@material-ui/icons/Forward';
+import LocalShippingIcon from '@material-ui/icons/LocalShipping';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import MoneyIcon from '@material-ui/icons/Money';
+import ListAltIcon from '@material-ui/icons/ListAlt';
+import KeyboardIcon from '@material-ui/icons/Keyboard';
 import CloseIcon from '@material-ui/icons/Close';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -55,22 +59,40 @@ const SideMenu: React.FC = () => {
       <ThemeProvider theme={theme}>
         <Paper>
           <List>
-            <Link to="/">
+            <Link to="/" className={classes.list}>
               <ListItem onClick={closeDrawer} className={classes.listItem}>
                 <ReorderIcon className={classes.icons} />
-                Tabla de Productos
+                <ListItemText primary="Lista de Productos" />
               </ListItem>
             </Link>
-            <Link to="/seccion2">
+            <Link to="/seccion2" className={classes.list}>
               <ListItem onClick={closeDrawer} className={classes.listItem}>
-                <LanguageIcon className={classes.icons} />
-                text
+                <ShoppingCartIcon className={classes.icons} />
+                Pedidos pendientes
               </ListItem>
             </Link>
-            <Link to="/seccion3">
+            <Link to="/seccion3" className={classes.list}>
               <ListItem onClick={closeDrawer} className={classes.listItem}>
-                <ForwardIcon className={classes.icons} />
-                text
+                <LocalShippingIcon className={classes.icons} />
+                Pedidos Entregados
+              </ListItem>
+            </Link>
+            <Link to="/seccion4" className={classes.list}>
+              <ListItem onClick={closeDrawer} className={classes.listItem}>
+                <MoneyIcon className={classes.icons} />
+                Presupuestos
+              </ListItem>
+            </Link>
+            <Link to="/seccion5" className={classes.list}>
+              <ListItem onClick={closeDrawer} className={classes.listItem}>
+                <ListAltIcon className={classes.icons} />
+                Facturas
+              </ListItem>
+            </Link>
+            <Link to="/seccion6" className={classes.list}>
+              <ListItem onClick={closeDrawer} className={classes.listItem}>
+                <KeyboardIcon className={classes.icons} />
+                Datos contables
               </ListItem>
             </Link>
           </List>
@@ -162,6 +184,15 @@ const SideMenu: React.FC = () => {
                 </Route>
                 <Route exact path="/seccion3">
                   <h1>section 3</h1>
+                </Route>
+                <Route exact path="/seccion4">
+                  <h1>section 4</h1>
+                </Route>
+                <Route exact path="/seccion5">
+                  <h1>section 5</h1>
+                </Route>
+                <Route exact path="/seccion6">
+                  <h1>section 6</h1>
                 </Route>
               </SwitchItem>
             </main>

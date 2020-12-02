@@ -1,11 +1,11 @@
 import { makeStyles } from '@material-ui/core/styles';
+import TitleSublimables from '../../assets/images/title.png';
 
 const primary = '#607D8B';
 const textprimaryColor = '#FFFFFF';
 const primaryTextColor = '#212121';
-const accentColor = '#FF5722';
 const defaultColor = '#BDBDBD';
-const drawerWidth = 140;
+const drawerWidth = 150;
 const usesStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -18,7 +18,7 @@ const usesStyles = makeStyles((theme) => ({
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
-    backgroundColor: primary,
+    backgroundImage: `url(${TitleSublimables}) `,
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -29,11 +29,11 @@ const usesStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
     width: drawerWidth,
-    backgroundColor: primary,
   },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
+    textDecoration: 'none',
   },
   closeMenuButton: {
     marginRight: 'auto',
@@ -45,7 +45,7 @@ const usesStyles = makeStyles((theme) => ({
     fontSize: '15px',
     color: primaryTextColor,
     '&:hover': {
-      backgroundColor: accentColor,
+      backgroundColor: defaultColor,
     },
   },
   icons: {
@@ -68,6 +68,9 @@ const usesStyles = makeStyles((theme) => ({
   dashboard: {
     backgroundColor: defaultColor,
     color: textprimaryColor,
+  },
+  list: {
+    textDecoration: 'none',
   },
 }));
 

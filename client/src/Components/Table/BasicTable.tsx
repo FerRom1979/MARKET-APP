@@ -125,6 +125,7 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
             }}
             icons={tableIcons}
             options={{
+              actionsColumnIndex: -1,
               sorting: true,
               headerStyle: {
                 backgroundColor: '#01579b',

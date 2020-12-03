@@ -14,15 +14,15 @@ const Dashboard: React.FC<Idarkmode> = ({ darkmode }) => {
     },
   });
   return (
-    <ThemeProvider theme={theme}>
-      <div className={classes.root}>
+    <div className={classes.root}>
+      <ThemeProvider theme={theme}>
         <Grid container spacing={1}>
-          <Grid item xs={12} sm={10}>
+          <Grid item xs={12}>
             <BasicTable darkmode={darkmode} />
           </Grid>
         </Grid>
-      </div>
-    </ThemeProvider>
+      </ThemeProvider>
+    </div>
   );
 };
 

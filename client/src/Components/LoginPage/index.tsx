@@ -26,7 +26,7 @@ const Login: React.FC = () => {
 
   if (jwt) {
     setTimeout(() => {
-      history.push('/sidemenu');
+      history.push('/listProducts');
     }, 1000);
   }
 
@@ -44,7 +44,7 @@ const Login: React.FC = () => {
         if (response.status === 200) {
           setLogin(true);
           setTimeout(() => {
-            history.push('/sidemenu');
+            history.push('/listProducts');
           });
           localStorage.setItem('token', response.data.token);
           setJwt(response.data.token);
@@ -71,7 +71,7 @@ const Login: React.FC = () => {
         if (response.status === 200) {
           setLogin(true);
           setTimeout(() => {
-            history.push('/sidemenu');
+            history.push('/listProducts');
           }, 1000);
           localStorage.setItem('token', response.data.token);
           setJwt(response.data.token);

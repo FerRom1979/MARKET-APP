@@ -7,7 +7,6 @@ import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
-import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
 import MenuIcon from '@material-ui/icons/Menu';
 import ReorderIcon from '@material-ui/icons/Reorder';
@@ -59,10 +58,10 @@ const SideMenu: React.FC = () => {
       <ThemeProvider theme={theme}>
         <Paper>
           <List>
-            <Link to="/" className={classes.list}>
+            <Link to="/listProducts" className={classes.list}>
               <ListItem onClick={closeDrawer} className={classes.listItem}>
                 <ReorderIcon className={classes.icons} />
-                <ListItemText primary="Lista de Productos" />
+                Lista de Productos
               </ListItem>
             </Link>
             <Link to="/seccion2" className={classes.list}>
@@ -122,12 +121,12 @@ const SideMenu: React.FC = () => {
                 <Typography variant="h6" noWrap>
                   {t('sidemenu.title-nav')}
                 </Typography>
-                <IconButton className={classes.language}>
-                  <ButtonGroup disableElevation variant="contained" className={classes.button}>
-                    <Button onClick={() => i18n.changeLanguage('en')}>En</Button>
-                    <Button onClick={() => i18n.changeLanguage('es')}>Es</Button>
-                  </ButtonGroup>
-                </IconButton>
+                {/* <IconButton className={classes.language}> */}
+                <ButtonGroup disableElevation variant="contained" className={classes.button}>
+                  <Button onClick={() => i18n.changeLanguage('en')}>En</Button>
+                  <Button onClick={() => i18n.changeLanguage('es')}>Es</Button>
+                </ButtonGroup>
+                {/* </IconButton> */}
                 <ToggleButtonGroup
                   value={formats}
                   onChange={handleFormat}
@@ -176,7 +175,7 @@ const SideMenu: React.FC = () => {
             <main className={classes.content}>
               <div className={classes.toolbar} />
               <SwitchItem>
-                <Route exact path="/">
+                <Route exact path="/listProducts">
                   <Dashboard darkmode={darkmode} />
                 </Route>
                 <Route exact path="/seccion2">

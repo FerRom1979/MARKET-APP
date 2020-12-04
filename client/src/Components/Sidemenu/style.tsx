@@ -1,77 +1,70 @@
-import { makeStyles } from '@material-ui/core/styles';
-import TitleSublimables from '../../assets/images/title.png';
+import { createStyles, makeStyles } from '@material-ui/core';
 
-const primary = '#607D8B';
-const textprimaryColor = '#FFFFFF';
-const primaryTextColor = '#212121';
-const defaultColor = '#BDBDBD';
-const drawerWidth = 150;
-const usesStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-  },
-  drawer: {
-    [theme.breakpoints.up('sm')]: {
+const drawerWidth = '200px';
+const usesStyles = makeStyles((theme) =>
+  createStyles({
+    root: {
+      display: 'flex',
+    },
+    drawer: {
+      [theme.breakpoints.up('sm')]: {
+        width: drawerWidth,
+        flexShrink: 0,
+      },
+    },
+    appBar: {
+      zIndex: theme.zIndex.drawer + 1,
+      background: theme.palette.primary.main,
+    },
+    menuButton: {
+      marginRight: theme.spacing(2),
+      [theme.breakpoints.up('sm')]: {
+        display: 'none',
+        background: theme.palette.secondary.main,
+      },
+    },
+    toolbar: theme.mixins.toolbar,
+    drawerPaper: {
       width: drawerWidth,
-      flexShrink: 0,
+      background: theme.palette.secondary.main,
     },
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    backgroundImage: `url(${TitleSublimables}) `,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up('sm')]: {
-      display: 'none',
+    content: {
+      flexGrow: 1,
+      padding: theme.spacing(3),
+      textDecoration: 'none',
     },
-  },
-  toolbar: theme.mixins.toolbar,
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    textDecoration: 'none',
-  },
-  closeMenuButton: {
-    marginRight: 'auto',
-    marginLeft: 0,
-  },
-  listItem: {
-    borderBottom: '2px solid gray',
-    textDecoration: 'none',
-    fontSize: '15px',
-    color: primaryTextColor,
-    '&:hover': {
-      backgroundColor: defaultColor,
+    closeMenuButton: {
+      marginRight: 'auto',
+      marginLeft: 0,
     },
-  },
-  icons: {
-    marginRight: '10px',
-  },
-  language: {
-    marginLeft: 'auto',
-  },
-  switch: {
-    marginRight: '20px',
-    marginLeft: '10px',
-    color: primaryTextColor,
-    fontWeight: 'bold',
-    fontSize: '20px',
-  },
-  button: {
-    backgroundColor: primary,
-    color: textprimaryColor,
-  },
-  dashboard: {
-    backgroundColor: defaultColor,
-    color: textprimaryColor,
-  },
-  list: {
-    textDecoration: 'none',
-  },
-}));
+    listItem: {
+      textDecoration: 'none',
+      fontSize: '12px',
+      color: 'white',
+      background: theme.palette.secondary.main,
+      '&:hover': {
+        backgroundColor: '#ff5722',
+      },
+    },
+    icons: {
+      marginRight: '10px',
+    },
+    switch: {
+      marginRight: '20px',
+      marginLeft: '10px',
+      color: 'white',
+      fontWeight: 'bold',
+      fontSize: '20px',
+    },
+    button: {
+      backgroundColor: theme.palette.action.selected,
+      color: 'white',
+      marginLeft: 'auto',
+    },
+    list: {
+      textDecoration: 'none',
+    },
+  }),
+);
 
 export default usesStyles;

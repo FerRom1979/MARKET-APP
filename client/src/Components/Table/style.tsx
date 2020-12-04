@@ -5,10 +5,11 @@ const useStyles = makeStyles(() => ({
     minWidth: '100vh',
   },
   head: {
-    backgroundColor: 'black',
+    backgroundColor: 'red',
     color: 'white',
   },
   body: {
+    backgroundColor: 'red',
     fontSize: 14,
   },
 }));

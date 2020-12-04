@@ -68,7 +68,7 @@
     "hooks": {
       "pre-commit": "lint-staged",
       "post-commit": "git update-index --again && yarn lint:fix && git add .",
-      "post-merge": "yarn install"
+      "post-merge": "yarn install && yarn lint:fix && git add ."
     }
   },
   "lint-staged": {

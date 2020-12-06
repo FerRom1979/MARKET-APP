@@ -19,7 +19,7 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
   // Lo que hice fue pasarle el token por parametro y ponerlo en el array  de dependencias del effect, cosa que cuando exista dispare la request
   const getData = async (bearerToken: string | null) => {
     try {
-      const res = await axios.get('http://localhost:5000/products', {
+      const res = await axios.get(`${process.env.REACT_APP_NOT_SECRET_CODE}/products`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: bearerToken,
@@ -62,7 +62,7 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
                   resolve();
                   axios({
                     method: 'POST',
-                    url: 'http://localhost:5000/products',
+                    url: `${process.env.REACT_APP_NOT_SECRET_CODE}/products`,
                     data: {
                       name,
                       description,
@@ -85,7 +85,7 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
                   resolve();
                   axios({
                     method: 'PUT',
-                    url: `http://localhost:5000/products/${_id}`,
+                    url: `${process.env.REACT_APP_NOT_SECRET_CODE}/products/${_id}`,
                     headers: {
                       'Content-Type': 'application/json',
                       Authorization: token,
@@ -109,7 +109,7 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
                   const { _id } = oldData;
                   resolve();
                   axios
-                    .delete(`http://localhost:5000/products/${_id}`, {
+                    .delete(`${process.env.REACT_APP_NOT_SECRET_CODE}/products/${_id}`, {
                       headers: {
                         'Content-Type': 'application/json',
                         Authorization: token,

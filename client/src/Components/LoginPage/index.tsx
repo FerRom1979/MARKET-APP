@@ -34,7 +34,7 @@ const Login: React.FC = () => {
     try {
       await axios({
         method: 'POST',
-        url: 'http://localhost:5000/signin',
+        url: `${process.env.REACT_APP_NOT_SECRET_CODE}/signin`,
         data: {
           email: loginUserEmail,
           password: loginPassword,
@@ -61,7 +61,7 @@ const Login: React.FC = () => {
     try {
       await axios({
         method: 'POST',
-        url: 'http://localhost:5000/signup/',
+        url: `${process.env.REACT_APP_NOT_SECRET_CODE}/signup/`,
         data: {
           username: user,
           email,

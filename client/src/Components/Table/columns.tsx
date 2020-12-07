@@ -5,7 +5,7 @@ const currency: IType = 'currency';
 
 const columns = [
   {
-    title: 'Marca',
+    title: 'Producto',
     field: 'name',
     type: string,
   },

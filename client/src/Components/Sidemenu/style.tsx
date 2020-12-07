@@ -1,74 +1,71 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core';
 
-const primary = '#607D8B';
-const textprimaryColor = '#FFFFFF';
-const primaryTextColor = '#212121';
-const accentColor = '#FF5722';
-const defaultColor = '#BDBDBD';
-const drawerWidth = 140;
-const usesStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-  },
-  drawer: {
-    [theme.breakpoints.up('sm')]: {
+const drawerWidth = '200px';
+const usesStyles = makeStyles((theme) =>
+  createStyles({
+    root: {
+      display: 'flex',
+    },
+    drawer: {
+      [theme.breakpoints.up('sm')]: {
+        width: drawerWidth,
+        flexShrink: 0,
+      },
+    },
+    appBar: {
+      zIndex: theme.zIndex.drawer + 1,
+      background: theme.palette.primary.main,
+    },
+    menuButton: {
+      marginRight: theme.spacing(2),
+      [theme.breakpoints.up('sm')]: {
+        display: 'none',
+        background: theme.palette.secondary.main,
+      },
+    },
+    toolbar: theme.mixins.toolbar,
+    drawerPaper: {
       width: drawerWidth,
-      flexShrink: 0,
+      background: theme.palette.secondary.main,
     },
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    backgroundColor: primary,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up('sm')]: {
-      display: 'none',
+    content: {
+      flexGrow: 1,
+      padding: theme.spacing(3),
+      textDecoration: 'none',
     },
-  },
-  toolbar: theme.mixins.toolbar,
-  drawerPaper: {
-    width: drawerWidth,
-    backgroundColor: primary,
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-  },
-  closeMenuButton: {
-    marginRight: 'auto',
-    marginLeft: 0,
-  },
-  listItem: {
-    borderBottom: '2px solid gray',
-    textDecoration: 'none',
-    fontSize: '15px',
-    color: primaryTextColor,
-    '&:hover': {
-      backgroundColor: accentColor,
+    closeMenuButton: {
+      marginRight: 'auto',
+      marginLeft: 0,
     },
-  },
-  icons: {
-    marginRight: '10px',
-  },
-  language: {
-    marginLeft: 'auto',
-  },
-  switch: {
-    marginRight: '20px',
-    marginLeft: '10px',
-    color: primaryTextColor,
-    fontWeight: 'bold',
-    fontSize: '20px',
-  },
-  button: {
-    backgroundColor: primary,
-    color: textprimaryColor,
-  },
-  dashboard: {
-    backgroundColor: defaultColor,
-    color: textprimaryColor,
-  },
-}));
+    listItem: {
+      textDecoration: 'none',
+      fontSize: '12px',
+      color: 'white',
+      marginTop: '1rem',
+      background: theme.palette.secondary.main,
+      '&:hover': {
+        backgroundColor: '#ff5722',
+      },
+    },
+    icons: {
+      marginRight: '10px',
+    },
+    switch: {
+      marginRight: '20px',
+      marginLeft: '10px',
+      color: 'white',
+      fontWeight: 'bold',
+      fontSize: '20px',
+    },
+    button: {
+      backgroundColor: theme.palette.action.selected,
+      color: 'white',
+      marginLeft: 'auto',
+    },
+    list: {
+      textDecoration: 'none',
+    },
+  }),
+);
 
 export default usesStyles;

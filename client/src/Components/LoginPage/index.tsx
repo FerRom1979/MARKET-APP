@@ -26,7 +26,7 @@ const Login: React.FC = () => {
 
   if (jwt) {
     setTimeout(() => {
-      history.push('/sidemenu');
+      history.push('/listProducts');
     }, 1000);
   }
 
@@ -34,7 +34,7 @@ const Login: React.FC = () => {
     try {
       await axios({
         method: 'POST',
-        url: 'http://localhost:5000/signin',
+        url: `${process.env.REACT_APP_NOT_SECRET_CODE}/signin`,
         data: {
           email: loginUserEmail,
           password: loginPassword,
@@ -44,7 +44,7 @@ const Login: React.FC = () => {
         if (response.status === 200) {
           setLogin(true);
           setTimeout(() => {
-            history.push('/sidemenu');
+            history.push('/listProducts');
           });
           localStorage.setItem('token', response.data.token);
           setJwt(response.data.token);
@@ -61,7 +61,7 @@ const Login: React.FC = () => {
     try {
       await axios({
         method: 'POST',
-        url: 'http://localhost:5000/signup/',
+        url: `${process.env.REACT_APP_NOT_SECRET_CODE}/signup/`,
         data: {
           username: user,
           email,
@@ -71,7 +71,7 @@ const Login: React.FC = () => {
         if (response.status === 200) {
           setLogin(true);
           setTimeout(() => {
-            history.push('/sidemenu');
+            history.push('/listProducts');
           }, 1000);
           localStorage.setItem('token', response.data.token);
           setJwt(response.data.token);

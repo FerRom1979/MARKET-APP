@@ -19,7 +19,7 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
   // Lo que hice fue pasarle el token por parametro y ponerlo en el array  de dependencias del effect, cosa que cuando exista dispare la request
   const getData = async (bearerToken: string | null) => {
     try {
-      const res = await axios.get('http://localhost:5000/products', {
+      const res = await axios.get(`${process.env.REACT_APP_NOT_SECRET_CODE}/products`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: bearerToken,
@@ -47,98 +47,102 @@ const BasiCTable: React.FC<Idarkmode> = ({ darkmode }) => {
     window.location.href = '/';
   };
   return (
-    <div>
-      <ThemeProvider theme={theme}>
-        <TableContainer component={Paper}>
-          <MaterialTable
-            title="Productos"
-            columns={columns}
-            data={data}
-            editable={{
-              onRowAdd: (newData) =>
-                new Promise((resolve) => {
-                  setTimeout(() => {
-                    setData([...data, newData]);
-                    const { description, finalPrice, name, price, quantity } = newData;
-                    resolve();
-                    axios({
-                      method: 'POST',
-                      url: 'http://localhost:5000/products',
-                      data: {
-                        name,
-                        description,
-                        quantity,
-                        price,
-                        finalPrice,
-                      },
-                      headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: token,
-                      },
-                    });
-                  }, 1000);
-                }),
+    <ThemeProvider theme={theme}>
+      <TableContainer component={Paper}>
+        <MaterialTable
+          title="Productos"
+          columns={columns}
+          data={data}
+          editable={{
+            onRowAdd: (newData) =>
+              new Promise((resolve) => {
+                setTimeout(() => {
+                  setData([...data, newData]);
+                  const { description, finalPrice, name, price, quantity } = newData;
+                  resolve();
+                  axios({
+                    method: 'POST',
+                    url: `${process.env.REACT_APP_NOT_SECRET_CODE}/products`,
+                    data: {
+                      name,
+                      description,
+                      quantity,
+                      price,
+                      finalPrice,
+                    },
+                    headers: {
+                      'Content-Type': 'application/json',
+                      Authorization: token,
+                    },
+                  });
+                }, 1000);
+              }),
 
-              onRowUpdate: (newData) =>
-                new Promise((resolve) => {
-                  setTimeout(() => {
-                    const { _id, description, finalPrice, name, price, quantity } = newData;
-                    resolve();
-                    axios({
-                      method: 'PUT',
-                      url: `http://localhost:5000/products/${_id}`,
+            onRowUpdate: (newData) =>
+              new Promise((resolve) => {
+                setTimeout(() => {
+                  const { _id, description, finalPrice, name, price, quantity } = newData;
+                  resolve();
+                  axios({
+                    method: 'PUT',
+                    url: `${process.env.REACT_APP_NOT_SECRET_CODE}/products/${_id}`,
+                    headers: {
+                      'Content-Type': 'application/json',
+                      Authorization: token,
+                    },
+                    data: {
+                      name,
+                      description,
+                      quantity,
+                      price,
+                      finalPrice,
+                    },
+                  }).then(() => {
+                    getData(token);
+                  });
+                  resolve();
+                }, 1000);
+              }),
+            onRowDelete: (oldData) =>
+              new Promise((resolve) => {
+                setTimeout(() => {
+                  const { _id } = oldData;
+                  resolve();
+                  axios
+                    .delete(`${process.env.REACT_APP_NOT_SECRET_CODE}/products/${_id}`, {
                       headers: {
                         'Content-Type': 'application/json',
                         Authorization: token,
                       },
-                      data: {
-                        name,
-                        description,
-                        quantity,
-                        price,
-                        finalPrice,
-                      },
-                    }).then(() => {
+                    })
+                    .then(() => {
                       getData(token);
                     });
-                    resolve();
-                  }, 1000);
-                }),
-              onRowDelete: (oldData) =>
-                new Promise((resolve) => {
-                  setTimeout(() => {
-                    const { _id } = oldData;
-                    resolve();
-                    axios
-                      .delete(`http://localhost:5000/products/${_id}`, {
-                        headers: {
-                          'Content-Type': 'application/json',
-                          Authorization: token,
-                        },
-                      })
-                      .then(() => {
-                        getData(token);
-                      });
-                    resolve();
-                  }, 1000);
-                }),
-            }}
-            icons={tableIcons}
-            options={{
-              sorting: true,
-              headerStyle: {
-                backgroundColor: '#01579b',
-                color: '#FFF',
-              },
-            }}
-          />
-        </TableContainer>
-      </ThemeProvider>
-      <Button type="submit" onClick={singOff} variant="contained" color="primary">
+                  resolve();
+                }, 1000);
+              }),
+          }}
+          icons={tableIcons}
+          options={{
+            actionsColumnIndex: -1,
+            sorting: true,
+            headerStyle: {
+              backgroundColor: '#673ab7',
+              color: '#FFF',
+            },
+          }}
+          localization={{
+            header: {
+              actions: 'Acciones',
+            },
+          }}
+        />
+      </TableContainer>
+      <Button type="submit" onClick={singOff} variant="contained" color="default">
         Cerrar Sesion
       </Button>
       <div>{apiError && <span>{apiError}</span>}</div>
-    </div>
+    </ThemeProvider>
   );
 };
 

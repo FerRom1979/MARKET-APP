@@ -22,7 +22,7 @@ app.get("/", (req, res) => {
 app.use("/products", /* verifyToken, */ require("../routes/product.route"));
 app.use(
   "/productsSold",
-  /* verifyToken, */ require("../routes/productsSold.route")
+  /* verifyToken, */ require("../routes/productSold.route")
 );
 
 app.use("/", require("../routes/auth.route"));

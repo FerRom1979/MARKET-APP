@@ -1,4 +1,4 @@
-const productSchema = require("../models/productSchema");
+const productSchema = require("../models/productSoldSchema");
 
 exports.getProduct = async (req, res) => {
   const products = await productSchema.find();
@@ -8,7 +8,6 @@ exports.getProduct = async (req, res) => {
 exports.postProduct = async (req, res) => {
   const {
     name,
-    code,
     material,
     quantity,
     measures,
@@ -19,7 +18,6 @@ exports.postProduct = async (req, res) => {
   } = req.body;
   const product = new productSchema({
     name,
-    code,
     material,
     quantity,
     measures,

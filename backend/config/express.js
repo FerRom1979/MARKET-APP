@@ -20,6 +20,11 @@ app.get("/", (req, res) => {
 
 /* Routes */
 app.use("/products", /* verifyToken, */ require("../routes/product.route"));
+app.use(
+  "/productsSold",
+  /* verifyToken, */ require("../routes/productsSold.route")
+);
+
 app.use("/", require("../routes/auth.route"));
 
 app.listen(app.get("port"), () => {

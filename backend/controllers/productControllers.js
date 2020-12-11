@@ -6,12 +6,24 @@ exports.getProduct = async (req, res) => {
 };
 
 exports.postProduct = async (req, res) => {
-  const { name, description, quantity, price, finalPrice } = req.body;
+  const {
+    name,
+    material,
+    quantity,
+    measures,
+    datePurchase,
+    provider,
+    listPrice,
+    finalPrice,
+  } = req.body;
   const product = new productSchema({
     name,
-    description,
+    material,
     quantity,
-    price,
+    measures,
+    datePurchase,
+    provider,
+    listPrice,
     finalPrice,
   });
   await product.save((err) => {
